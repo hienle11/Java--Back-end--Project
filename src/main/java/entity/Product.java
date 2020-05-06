@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "product")
 public class Product extends AbstractEntity
 {
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

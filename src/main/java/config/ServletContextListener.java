@@ -10,7 +10,6 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent)
     {
-        System.out.println("here");
     }
 
     @Override

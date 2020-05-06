@@ -6,8 +6,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
-public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID> extends AbstractDAO
+public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID>
 {
     @Autowired
     SessionFactory sessionFactory;
@@ -25,8 +26,27 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID> ex
         return (Entity) query.uniqueResult();
     }
 
+    public List<Entity> findAll() {
+        Query query = sessionFactory.getCurrentSession().createQuery("from " + entityClass.getSimpleName());
+        return query.list();
+    }
+
     public Entity create(Entity entity) {
         sessionFactory.getCurrentSession().saveOrUpdate(entity);
         return entity;
+    }
+
+    public Entity update(Entity entity) {
+        sessionFactory.getCurrentSession().update(entity);
+        return entity;
+    }
+
+    public void delete(Entity entity) {
+        sessionFactory.getCurrentSession().delete(entity);
+    }
+
+    public void deleteById(ID id) {
+        Entity entity = findById(id);
+        delete(entity);
     }
 }

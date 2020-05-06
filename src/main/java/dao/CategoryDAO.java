@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CategoryDAO
         extends AbstractHibernateDAO<Product, Long>
-        implements IGenericDAO<Product, Long>{
+        implements GenericDAO<Product, Long> {
 }

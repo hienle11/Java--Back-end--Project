@@ -1,20 +1,18 @@
 package service;
 
-import dao.IGenericDAO;
+import dao.GenericDAO;
 import entity.AbstractEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
-public class AbstractCRUDService <Entity extends AbstractEntity, ID>
-{
-    @Autowired
-    SessionFactory sessionFactory;
+public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID> {
+    private GenericDAO dao;
 
-    IGenericDAO dao;
-
-    AbstractCRUDService(IGenericDAO dao) {
+    AbstractCRUDService(GenericDAO dao) {
         this.dao = dao;
     }
 
@@ -22,8 +20,23 @@ public class AbstractCRUDService <Entity extends AbstractEntity, ID>
         return (Entity) dao.findById(id);
     }
 
+    public List<Entity> findAll() {
+        return dao.findAll();
+    }
+
     public Entity create(Entity entity) {
-        dao.create(entity);
-        return entity;
+        return (Entity) dao.create(entity);
+    }
+
+    public Entity update(Entity entity) {
+        return (Entity) dao.update(entity);
+    }
+
+    public void delete(Entity entity) {
+        dao.delete(entity);
+    }
+
+    public void deleteById(ID id) {
+        dao.deleteById(id);
     }
 }

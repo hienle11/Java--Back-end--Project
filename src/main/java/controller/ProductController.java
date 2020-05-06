@@ -1,20 +1,23 @@
 package controller;
 
+import com.sun.tools.javac.jvm.Gen;
 import entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import service.GenericService;
 import service.ProductService;
 
 /**
  * Created by CoT on 7/29/18.
  */
 @RestController
-@RequestMapping(path = "/")
-public class ProductController
-{
+@RequestMapping(path = "/products")
+public class ProductController extends AbstractCRUDController<Product, Long>{
 
     @Autowired
-    private ProductService productService;
+    ProductController(ProductService productService) {
+        super(productService);
+    }
 
 //    @RequestMapping(path = "students", method = RequestMethod.GET)
 //    public List<Student> getStudentsByName(@RequestParam String s){
@@ -25,9 +28,4 @@ public class ProductController
 //    public Student addStudent(@RequestBody Student student) {
 //        return productService.saveStudent(student);
 //    }
-
-    @PostMapping("/products")
-    public Product createAProduct(@RequestBody Product product) {
-        return productService.create(product);
-    }
 }
