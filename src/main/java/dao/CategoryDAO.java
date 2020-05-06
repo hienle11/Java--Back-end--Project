@@ -1,10 +1,10 @@
 package dao;
 
-import entity.Product;
+import entity.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class CategoryDAO
-        extends AbstractHibernateDAO<Product, Long>
-        implements GenericDAO<Product, Long> {
+        extends AbstractHibernateDAO<Category, Long>
+        implements GenericDAO<Category, Long> {
 }

@@ -1,6 +1,9 @@
 package entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by CoT on 10/14/17.
@@ -16,6 +19,7 @@ public class Category extends AbstractEntity
     private Long id;
 
     @Column
+    @NotBlank(message = "category name must not be empty")
     private String name;
 
     public Long getId()

@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableWebMvc
-@ComponentScan(basePackages = {"controller", "service", "dao"})
+@ComponentScan(basePackages = {"controller", "service", "dao", "exception"})
 public class AppConfig {
 
     @Bean

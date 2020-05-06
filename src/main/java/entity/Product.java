@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by CoT on 10/14/17.
@@ -31,6 +32,7 @@ public class Product extends AbstractEntity
     private String description;
 
     @ManyToOne
+    @NotNull(message = "category must not be null")
     private Category category;
 
     public Long getId()

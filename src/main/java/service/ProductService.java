@@ -1,24 +1,14 @@
 package service;
 
-import dao.CategoryDAO;
-import dao.GenericDAO;
+
 import dao.ProductDAO;
 import entity.Product;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.support.CustomSQLErrorCodesTranslation;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
-/**
- * Created by CoT on 10/14/17.
- */
-
+// this is the Product Service bean, which provides CRUD API for products
 @Service
 public class ProductService extends AbstractCRUDService<Product, Long> implements GenericService<Product, Long>{
 
@@ -26,13 +16,4 @@ public class ProductService extends AbstractCRUDService<Product, Long> implement
     ProductService(ProductDAO productDAO) {
         super(productDAO);
     }
-
-//    public List<Student> findStudents(String name){
-//       Query query = sessionFactory.getCurrentSession().createQuery("from Student s where s.name like :name");
-//
-//       query.setString("name", "%"+name+"%");
-//
-//       return query.list();
-//    }
-
 }

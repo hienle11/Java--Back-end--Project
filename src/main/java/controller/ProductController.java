@@ -1,10 +1,8 @@
 package controller;
 
-import com.sun.tools.javac.jvm.Gen;
 import entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.GenericService;
 import service.ProductService;
 
 /**
@@ -15,17 +13,7 @@ import service.ProductService;
 public class ProductController extends AbstractCRUDController<Product, Long>{
 
     @Autowired
-    ProductController(ProductService productService) {
-        super(productService);
+    ProductController(ProductService service) {
+        super(service);
     }
-
-//    @RequestMapping(path = "students", method = RequestMethod.GET)
-//    public List<Student> getStudentsByName(@RequestParam String s){
-//        return productService.findStudents(s);
-//    }
-//
-//    @RequestMapping(path = "students", method = RequestMethod.POST)
-//    public Student addStudent(@RequestBody Student student) {
-//        return productService.saveStudent(student);
-//    }
 }

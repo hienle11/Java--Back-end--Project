@@ -2,19 +2,21 @@ package service;
 
 import entity.AbstractEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface GenericService<Entity extends AbstractEntity, ID> {
+// this is the interface of the generic service, which shows how to implement all CRUD service functions
+public interface GenericService<Entity extends AbstractEntity, ID extends Serializable> {
 
-    public Entity findById(ID id);
+    Entity findById(ID id);
 
-    public List<Entity> findAll();
+    List<Entity> findAll();
 
-    public Entity create(Entity entity);
+    Entity create(Entity entity);
 
-    public Entity update(Entity entity);
+    Entity update(Entity entity);
 
-    public void delete(Entity entity);
+    void delete(Entity entity);
 
-    public void deleteById(ID id);
+    void deleteById(ID id);
 }

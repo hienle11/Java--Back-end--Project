@@ -2,14 +2,14 @@ package service;
 
 import dao.GenericDAO;
 import entity.AbstractEntity;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
+// this is the abstract class of service beans, which contains all CRUD implementations in service layer
 @Transactional
-public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID> {
+public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID extends Serializable> {
     private GenericDAO dao;
 
     AbstractCRUDService(GenericDAO dao) {
