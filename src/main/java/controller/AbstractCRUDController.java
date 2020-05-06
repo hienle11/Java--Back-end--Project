@@ -8,9 +8,9 @@ import service.GenericService;
 
 public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID> {
 
-    private AbstractCRUDService service;
+    private GenericService service;
 
-    AbstractCRUDController(AbstractCRUDService service) {
+    AbstractCRUDController(GenericService service) {
         this.service = service;
     }
 

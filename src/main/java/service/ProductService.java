@@ -1,6 +1,7 @@
 package service;
 
 import dao.CategoryDAO;
+import dao.GenericDAO;
 import dao.ProductDAO;
 import entity.Product;
 import org.hibernate.Query;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 
 @Service
-public class ProductService extends AbstractCRUDService<Product, Long>{
+public class ProductService extends AbstractCRUDService<Product, Long> implements GenericService<Product, Long>{
 
     @Autowired
     ProductService(ProductDAO productDAO) {

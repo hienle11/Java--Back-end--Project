@@ -4,12 +4,12 @@ import entity.AbstractEntity;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import service.GenericService;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID>
-{
+public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID> {
     @Autowired
     SessionFactory sessionFactory;
 

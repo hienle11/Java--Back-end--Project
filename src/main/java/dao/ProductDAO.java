@@ -8,3 +8,4 @@ public class ProductDAO
         extends AbstractHibernateDAO<Product, Long>
         implements GenericDAO<Product, Long> {
 }
+
