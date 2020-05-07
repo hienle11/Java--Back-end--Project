@@ -1,15 +1,14 @@
 package entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.Cascade;
 
-/**
- * Created by CoT on 10/14/17.
- */
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "product")
-public class Product extends AbstractEntity
+public class Product extends AbstractEntity<Long>
 {
     @Id
     @Column
@@ -17,6 +16,7 @@ public class Product extends AbstractEntity
     private Long id;
 
     @Column
+    @NotBlank(message = "product name must not be blank")
     private String name;
 
     @Column
@@ -28,11 +28,12 @@ public class Product extends AbstractEntity
     @Column
     private String company;
 
-    @Column
+    @Column(columnDefinition="TEXT")
     private String description;
 
     @ManyToOne
-    @NotNull(message = "category must not be null")
+    @NotNull(message = "category of product must not be null")
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_Product_Category"))
     private Category category;
 
     public Long getId()

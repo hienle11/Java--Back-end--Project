@@ -1,9 +1,9 @@
 package entity;
 
-import org.hibernate.validator.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Created by CoT on 10/14/17.
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "category")
-public class Category extends AbstractEntity
+public class Category extends AbstractEntity<Long>
 {
     @Id
     @Column
@@ -41,4 +41,5 @@ public class Category extends AbstractEntity
     {
         this.name = name;
     }
+
 }

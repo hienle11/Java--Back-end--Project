@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CategoryService extends AbstractCRUDService<Category, Long> implements GenericService<Category, Long>{
 
     @Autowired
-    CategoryService(CategoryDAO categoryDAO) {
-        super(categoryDAO);
+    CategoryService(CategoryDAO dao) {
+        super(dao);
     }
 }

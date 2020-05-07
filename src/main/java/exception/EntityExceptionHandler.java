@@ -13,6 +13,7 @@ import java.util.List;
 @ControllerAdvice
 public class EntityExceptionHandler {
 
+    // this handler is to handle requests on null entity
     @ExceptionHandler
     public ResponseEntity<EntityErrorResponse> handleEntityNotFoundException(EntityNotFoundException exc) {
         EntityErrorResponse error = new EntityErrorResponse(
@@ -22,6 +23,7 @@ public class EntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    // this handler is for all other exceptions
     @ExceptionHandler
     public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {
         EntityErrorResponse error = new EntityErrorResponse(
@@ -31,6 +33,7 @@ public class EntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    // this handler is for constraints violations on entity (such as NotBlank etc)
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<EntityErrorResponse> handleConstraintViolationException(ConstraintViolationException exc) {
 

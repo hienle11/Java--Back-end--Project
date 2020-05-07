@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class ProductService extends AbstractCRUDService<Product, Long> implements GenericService<Product, Long>{
 
     @Autowired
-    ProductService(ProductDAO productDAO) {
-        super(productDAO);
+    ProductService(ProductDAO dao) {
+        super(dao);
     }
 }

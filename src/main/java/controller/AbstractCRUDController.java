@@ -19,7 +19,11 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
 
     @GetMapping
     public List<Entity> findAllEntities() {
-        return service.findAll();
+        List<Entity> entityList = service.findAll();
+        if(entityList.size() == 0) {
+            throw new EntityNotFoundException("The table is empty");
+        }
+        return entityList;
     }
 
     @GetMapping("/{entityId}")
@@ -38,16 +42,28 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
 
     @PutMapping
     public Entity updateEntity(@RequestBody Entity entity) {
+        Entity theEntity = (Entity) service.findById(entity.getId());
+        if (theEntity == null) { // throw exception if the entity is not found in the database
+            throw new EntityNotFoundException("The entity id not found - " + entity.getId());
+        }
         return (Entity) service.update(entity);
     }
 
     @DeleteMapping
     public void deleteEntity(@RequestBody Entity entity) {
+        Entity theEntity = (Entity) service.findById(entity.getId());
+        if (theEntity == null) { // throw exception if the entity is not found in the database
+            throw new EntityNotFoundException("The entity id not found - " + entity.getId());
+        }
         service.delete(entity);
     }
 
-    @DeleteMapping("/{entityId")
+    @DeleteMapping("/{entityId}")
     public void deleteEntityById(@PathVariable ID entityId) {
+        Entity theEntity = (Entity) service.findById(entityId);
+        if (theEntity == null) { // throw exception if the entity is not found in the database
+            throw new EntityNotFoundException("The entity id not found - " + entityId);
+        }
         service.deleteById(entityId);
     }
 }
