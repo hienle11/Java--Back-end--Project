@@ -31,6 +31,14 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         return query.getResultList();
     }
 
+    public List<Entity> findByPage(int limit, int offset) {
+        Query<Entity> query = sessionFactory.getCurrentSession()
+                .createQuery("from " + entityClass.getSimpleName());
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+        return query.list();
+    }
+
     public Entity create(Entity entity) {
         sessionFactory.getCurrentSession().save(entity);
         return entity;

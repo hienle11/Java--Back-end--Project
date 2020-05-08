@@ -19,4 +19,6 @@ public interface GenericService<Entity extends AbstractEntity, ID extends Serial
     void delete(Entity entity);
 
     void deleteById(ID id);
+
+    List<Entity> findByPage(int limit, int offset);
 }

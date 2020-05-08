@@ -22,6 +22,10 @@ public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID ext
         return getDao().findAll();
     }
 
+    public List<Entity> findByPage(int limit, int offset) {
+        return getDao().findByPage(limit, offset);
+    }
+
     public Entity create(Entity entity) {
         return (Entity) getDao().create(entity);
     }

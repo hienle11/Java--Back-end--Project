@@ -12,14 +12,14 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
     
     protected abstract GenericService getService();
     
-    @GetMapping
-    public List<Entity> findAllEntities() {
-        List<Entity> entityList = getService().findAll();
-        if(entityList.size() == 0) {
-            throw new EntityNotFoundException("The table is empty");
-        }
-        return entityList;
-    }
+//    @GetMapping
+//    public List<Entity> findAllEntities() {
+//        List<Entity> entityList = getService().findAll();
+//        if(entityList.size() == 0) {
+//            throw new EntityNotFoundException("The table is empty");
+//        }
+//        return entityList;
+//    }
 
     @GetMapping("/{entityId}")
     public Entity findEntityById(@PathVariable ID entityId) {
@@ -30,6 +30,15 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
         return theEntity;
     }
 
+    @GetMapping
+    public List<Entity> findEntitiesByPage(
+            @RequestParam(name = "limit") int limit, @RequestParam(name = "offset") int offset) {
+        List<Entity> entityList = getService().findByPage(limit, offset);
+        if(entityList.size() == 0) {
+            throw new EntityNotFoundException("The table is empty");
+        }
+        return entityList;
+    }
     @PostMapping
     public Entity createEntity(@RequestBody Entity entity) {
         return (Entity) getService().create(entity);
