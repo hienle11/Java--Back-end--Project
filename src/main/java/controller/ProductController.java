@@ -2,7 +2,9 @@ package controller;
 
 import entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+import service.GenericService;
 import service.ProductService;
 
 @RestController
@@ -10,7 +12,11 @@ import service.ProductService;
 public class ProductController extends AbstractCRUDController<Product, Long>{
 
     @Autowired
-    ProductController(ProductService service) {
-        super(service);
+    @Qualifier("productService")
+    GenericService productService;
+
+    @Override
+    protected GenericService getService() {
+        return productService;
     }
 }

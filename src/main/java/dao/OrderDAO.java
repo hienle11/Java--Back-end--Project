@@ -1,10 +1,10 @@
 package dao;
 
 import entity.Order;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDAO
-        extends AbstractHibernateDAO<Order, Long>
-        implements GenericDAO<Order, Long> {
+@Qualifier("orderDAO")
+public class OrderDAO extends AbstractHibernateDAO<Order, Long> {
 }

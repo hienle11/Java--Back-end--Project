@@ -20,7 +20,7 @@ import java.util.Properties;
  * Created by CoT on 10/14/17.
  */
 @Configuration
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 @EnableWebMvc
 @ComponentScan(basePackages = {"controller", "service", "dao", "exception"})
 public class AppConfig {

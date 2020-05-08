@@ -1,6 +1,7 @@
 package dao;
 
 import entity.AbstractEntity;
+import entity.Category;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,8 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID extends Serializable> {
+public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID extends Serializable>
+        implements GenericDAO<Entity, ID> {
     @Autowired
     SessionFactory sessionFactory;
 
@@ -21,19 +23,13 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
     }
 
     public Entity findById(ID id) {
-        return (Entity) sessionFactory.getCurrentSession().get(entityClass, id);
+        return sessionFactory.getCurrentSession().get(entityClass, id);
     }
 
     public List<Entity> findAll() {
         Query<Entity> query = sessionFactory.getCurrentSession()
                 .createQuery("from " + entityClass.getSimpleName());
         return query.getResultList();
-    }
-
-    public Entity find(Entity entity) {
-        Query<Entity> query = sessionFactory.getCurrentSession()
-                .createQuery("from " + entityClass.getSimpleName() + " where id");
-        return query.uniqueResult();
     }
 
     public Entity create(Entity entity) {

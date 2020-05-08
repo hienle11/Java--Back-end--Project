@@ -1,15 +1,22 @@
 package service;
 
+import dao.GenericDAO;
 import dao.OrderDAO;
 import entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderService extends AbstractCRUDService<Order, Long> implements GenericService<Order, Long>{
+@Qualifier("orderService")
+public class OrderService extends AbstractCRUDService<Order, Long>{
 
     @Autowired
-    OrderService(OrderDAO dao) {
-        super(dao);
+    @Qualifier("orderDAO")
+    GenericDAO orderDAO;
+
+    @Override
+    protected GenericDAO getDao() {
+        return orderDAO;
     }
 }

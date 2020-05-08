@@ -1,11 +1,11 @@
 package dao;
 
 import entity.Product;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProductDAO
-        extends AbstractHibernateDAO<Product, Long>
-        implements GenericDAO<Product, Long> {
+@Qualifier("productDAO")
+public class ProductDAO extends AbstractHibernateDAO<Product, Long> {
 }
 
