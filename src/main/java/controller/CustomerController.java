@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.CustomerService;
 import service.GenericService;
 
 @RestController
@@ -13,7 +12,7 @@ import service.GenericService;
 public class CustomerController extends AbstractCRUDController<Customer, Long>{
 
     @Autowired
-    @Qualifier("customerService")
+    @Qualifier("customerServiceImpl")
     GenericService customerService;
 
     @Override

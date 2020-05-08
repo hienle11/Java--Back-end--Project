@@ -1,7 +1,6 @@
 package dao;
 
 import entity.AbstractEntity;
-import entity.Category;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

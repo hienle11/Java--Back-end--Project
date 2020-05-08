@@ -1,10 +1,10 @@
 package dao;
 
-import entity.Customer;
+import entity.OrderDetail;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Qualifier("customerDAO")
-public class CustomerDAO extends AbstractHibernateDAO<Customer, Long> {
+@Qualifier("orderDetailDAO")
+public class OrderDetailDAOImpl extends AbstractHibernateDAO<OrderDetail, Long> {
 }

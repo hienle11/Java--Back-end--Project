@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier("productDAO")
-public class ProductDAO extends AbstractHibernateDAO<Product, Long> {
+public class ProductDAOImpl extends AbstractHibernateDAO<Product, Long> {
 }
 

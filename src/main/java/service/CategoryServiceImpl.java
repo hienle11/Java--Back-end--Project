@@ -1,22 +1,22 @@
 package service;
 
 import dao.GenericDAO;
-import dao.StaffDAO;
-import entity.Staff;
+import entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+// this is the Product Service bean, which provides CRUD API for Category
 @Service
-@Qualifier("staffService")
-public class StaffService extends AbstractCRUDService<Staff, Long> implements GenericService<Staff, Long>{
+@Qualifier("categoryService")
+public class CategoryServiceImpl extends AbstractCRUDService<Category, Long>{
 
     @Autowired
-    @Qualifier("staffDAO")
-    GenericDAO staffDAO;
+    @Qualifier("categoryDAOImpl")
+    GenericDAO categoryDAO;
 
     @Override
     protected GenericDAO getDao() {
-        return staffDAO;
+        return categoryDAO;
     }
 }

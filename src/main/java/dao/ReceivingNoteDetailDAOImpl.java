@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier("receivingNoteDetailDAO")
-public class ReceivingNoteDetailDAO extends AbstractHibernateDAO<ReceivingNoteDetail, Long> {
+public class ReceivingNoteDetailDAOImpl extends AbstractHibernateDAO<ReceivingNoteDetail, Long> {
 }
