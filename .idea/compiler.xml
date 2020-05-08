@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LeQuangHien - Assignment2" />
+        <module name="Enterprise-Assignment2" />
       </profile>
     </annotationProcessing>
   </component>
