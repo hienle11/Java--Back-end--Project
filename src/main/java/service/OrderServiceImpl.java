@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderServiceImpl extends AbstractCRUDService<Order, Long>{
+public class OrderServiceImpl extends AbstractService<Order, Long> {
 
     @Autowired
     @Qualifier("orderDAOImpl")

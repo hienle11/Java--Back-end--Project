@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReceivingNoteServiceImpl extends AbstractCRUDService<ReceivingNote, Long> implements GenericService<ReceivingNote, Long> {
+public class ReceivingNoteServiceImpl extends AbstractService<ReceivingNote, Long> implements GenericService<ReceivingNote, Long> {
 
     @Autowired
     @Qualifier("receivingNoteDAOImpl")

@@ -14,7 +14,7 @@ import java.util.List;
 
 // this is the abstract class of service beans, which contains all CRUD implementations in service layer
 @Transactional
-public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID extends Serializable> 
+public abstract class AbstractService<Entity extends AbstractEntity, ID extends Serializable>
         implements GenericService<Entity, ID> {
     
     protected abstract GenericDAO getDao();

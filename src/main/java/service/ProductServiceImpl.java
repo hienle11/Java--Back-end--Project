@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 // this is the Product Service bean, which provides CRUD API for products
 @Service
-public class ProductServiceImpl extends AbstractCRUDService<Product, Long> {
+public class ProductServiceImpl extends AbstractService<Product, Long> {
 
     @Autowired
     @Qualifier("productDAOImpl")

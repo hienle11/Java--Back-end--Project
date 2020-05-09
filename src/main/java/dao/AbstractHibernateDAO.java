@@ -74,7 +74,7 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
             }.copyProperties(currentEntity, incomingEntity);
         } catch (Exception exc) {
         } finally {
-            sessionFactory.getCurrentSession().update(currentEntity);
+            sessionFactory.getCurrentSession().merge(currentEntity);
             return currentEntity;
         }
     }

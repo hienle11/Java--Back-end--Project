@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 // this is the Product Service bean, which provides CRUD API for Category
 @Service
-public class CategoryServiceImpl extends AbstractCRUDService<Category, Long>{
+public class CategoryServiceImpl extends AbstractService<Category, Long> {
 
     @Autowired
     @Qualifier("categoryDAOImpl")
