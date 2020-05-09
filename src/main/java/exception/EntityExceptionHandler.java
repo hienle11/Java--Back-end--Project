@@ -23,17 +23,28 @@ public class EntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    // this handler is for all other exceptions
+    // this handler is to handle illegal access on special entity
     @ExceptionHandler
-    public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {
+    public ResponseEntity<EntityErrorResponse> handleEntityIllegalAccessException(EntityIllegalAccessException exc) {
         EntityErrorResponse error = new EntityErrorResponse(
-                                        HttpStatus.BAD_REQUEST.value(),
-                                        exc.getMessage(),
-                                        System.currentTimeMillis());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+                HttpStatus.FORBIDDEN.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
+    // this handler is for all other exceptions
+//    @ExceptionHandler
+//    public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {
+//        EntityErrorResponse error = new EntityErrorResponse(
+//                                        HttpStatus.BAD_REQUEST.value(),
+//                                        exc.getMessage(),
+//                                        System.currentTimeMillis());
+//        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+//    }
+
     // this handler is for constraints violations on entity (such as NotBlank etc)
+
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<EntityErrorResponse> handleConstraintViolationException(ConstraintViolationException exc) {
 

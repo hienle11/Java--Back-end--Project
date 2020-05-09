@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order_to_provider")
@@ -29,6 +30,10 @@ public class Order extends AbstractEntity<Long> {
     @NotNull(message = "provider of the order must not be null")
     @JoinColumn(foreignKey = @ForeignKey(name="FK_Order_Provider"))
     private Provider provider;
+
+    @NotNull(message = "order details must be provided")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    private List<OrderDetail> orderDetails;
 
     public Long getId() {
         return id;
@@ -60,5 +65,13 @@ public class Order extends AbstractEntity<Long> {
 
     public void setProvider(Provider provider) {
         this.provider = provider;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

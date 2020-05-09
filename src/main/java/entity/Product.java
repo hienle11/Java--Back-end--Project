@@ -3,6 +3,7 @@ package entity;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,6 +28,9 @@ public class Product extends AbstractEntity<Long>
 
     @Column
     private String company;
+
+    @Column
+    private double price;
 
     @Column(columnDefinition="TEXT")
     private String description;
@@ -104,5 +108,13 @@ public class Product extends AbstractEntity<Long>
     public void setCategory(Category category)
     {
         this.category = category;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

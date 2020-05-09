@@ -2,24 +2,18 @@ package controller;
 
 import entity.AbstractEntity;
 import exception.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import service.GenericService;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID extends Serializable> {
     
     protected abstract GenericService getService();
-    
-//    @GetMapping
-//    public List<Entity> findAllEntities() {
-//        List<Entity> entityList = getService().findAll();
-//        if(entityList.size() == 0) {
-//            throw new EntityNotFoundException("The table is empty");
-//        }
-//        return entityList;
-//    }
 
     @GetMapping("/{entityId}")
     public Entity findEntityById(@PathVariable ID entityId) {
@@ -31,14 +25,20 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
     }
 
     @GetMapping
-    public List<Entity> findEntitiesByPage(
-            @RequestParam(name = "limit") int limit, @RequestParam(name = "offset") int offset) {
-        List<Entity> entityList = getService().findByPage(limit, offset);
-        if(entityList.size() == 0) {
-            throw new EntityNotFoundException("The table is empty");
-        }
-        return entityList;
+    public Page<Entity> findEntitiesByPage(
+            @RequestParam(name = "size", required = false) Optional<Long> size,
+            @RequestParam(name = "page", required = false) Optional<Long> page) {
+
+        Long currentPage = page.orElse(Long.valueOf(1));
+        Long pageSize = size.orElse(Long.valueOf(5));
+
+        Page<Entity> entityPage = (Page<Entity>) getService().findPaginated
+                (PageRequest.of(currentPage.intValue() - 1, pageSize.intValue()));
+
+        return entityPage;
     }
+
+
     @PostMapping
     public Entity createEntity(@RequestBody Entity entity) {
         return (Entity) getService().create(entity);

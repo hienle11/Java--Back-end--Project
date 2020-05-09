@@ -1,5 +1,10 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinFormula;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,16 +18,23 @@ public class OrderDetail extends AbstractEntity<Long> {
     private Long id;
 
     @OneToOne
-    @NotNull(message = "product must not be null")
+    @NotNull(message = "product in order detail must not be null")
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_OrderDetail_Product"))
     private Product product;
 
     @Column
-    @NotNull(message = "quantity must not be null")
-    private Long quantity;
+    @NotNull(message = "quantity in order detail must not be null")
+    private long quantity;
 
     @Column
-    @NotNull(message = "quantity must not be null")
-    private Long price;
+    private double price;
+
+    @JsonIgnore
+    @ManyToOne
+    @NotNull(message = "order must not be null")
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_OrderDetail_Order"))
+    private Order order;
+
 
     public Long getId() {
         return id;
@@ -40,19 +52,29 @@ public class OrderDetail extends AbstractEntity<Long> {
         this.product = product;
     }
 
-    public Long getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
-    public Long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+
 }

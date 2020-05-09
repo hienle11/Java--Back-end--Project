@@ -2,9 +2,14 @@ package service;
 
 import dao.GenericDAO;
 import entity.AbstractEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 // this is the abstract class of service beans, which contains all CRUD implementations in service layer
@@ -22,8 +27,18 @@ public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID ext
         return getDao().findAll();
     }
 
-    public List<Entity> findByPage(int limit, int offset) {
-        return getDao().findByPage(limit, offset);
+    public Page<Entity> findPaginated(Pageable pageable) {
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Entity> paginatedList = getDao().findByPage(pageSize, startItem);
+
+        Page<Entity> entityPage
+                = new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), getDao().getTotalSize());
+
+        return entityPage;
     }
 
     public Entity create(Entity entity) {

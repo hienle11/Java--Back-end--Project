@@ -16,11 +16,9 @@ public class Staff extends AbstractEntity<Long> {
     private String name;
 
     @Column
-    @NotBlank(message = "staff address must not be blank")
     private String address;
 
     @Column
-    @NotBlank(message = "staff phone must not be blank")
     private String phone;
 
     @Column

@@ -1,6 +1,8 @@
 package service;
 
 import entity.AbstractEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,5 +22,5 @@ public interface GenericService<Entity extends AbstractEntity, ID extends Serial
 
     void deleteById(ID id);
 
-    List<Entity> findByPage(int limit, int offset);
+    Page<Entity> findPaginated(Pageable pageable);
 }

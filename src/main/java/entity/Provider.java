@@ -17,23 +17,18 @@ public class Provider extends AbstractEntity<Long>{
     private String name;
 
     @Column
-    @NotBlank(message = "provider address must not be blank")
     private String address;
 
     @Column
-    @NotBlank
     private String phone;
 
     @Column
-    @NotBlank
     private String fax;
 
     @Column
-    @NotBlank
     private String email;
 
     @Column
-    @NotBlank(message = "provider contact person must not be blank")
     private String contactPerson;
 
     public Long getId() {

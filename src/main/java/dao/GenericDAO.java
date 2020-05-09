@@ -19,4 +19,6 @@ public interface GenericDAO<Entity extends AbstractEntity, ID> {
     void deleteById(ID id);
 
     List<Entity> findByPage(int limit, int offset);
+
+    long getTotalSize();
 }
