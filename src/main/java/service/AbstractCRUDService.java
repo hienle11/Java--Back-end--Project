@@ -56,4 +56,17 @@ public abstract class AbstractCRUDService <Entity extends AbstractEntity, ID ext
     public void deleteById(ID id) {
         getDao().deleteById(id);
     }
+
+    public Page<Entity> searchPaginated(String field, String searchKey, Pageable pageable) {
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Entity> paginatedList = getDao().searchPaginated(field, searchKey);
+        Page<Entity> entityPage
+                = new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), 100);
+
+        return entityPage;
+    }
 }

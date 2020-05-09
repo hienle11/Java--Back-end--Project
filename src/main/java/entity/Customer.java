@@ -21,15 +21,12 @@ public class Customer extends AbstractEntity<Long> {
     private String address;
 
     @Column
-    @NotBlank
     private String phone;
 
     @Column
-    @NotBlank
     private String fax;
 
     @Column
-    @NotBlank
     private String email;
 
     @Column

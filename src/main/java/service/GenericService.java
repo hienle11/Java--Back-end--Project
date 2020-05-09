@@ -23,4 +23,6 @@ public interface GenericService<Entity extends AbstractEntity, ID extends Serial
     void deleteById(ID id);
 
     Page<Entity> findPaginated(Pageable pageable);
+
+    Page<Entity> searchPaginated(String field, String searchKey, Pageable pageable);
 }

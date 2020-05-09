@@ -1,16 +1,15 @@
 package entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
-@Table(name = "inventory_receiving_note_details")
-public class ReceivingNoteDetail extends AbstractEntity<Long> {
+@Table(name = "inventory_delivery_note_details")
+public class DeliveryNoteDetail extends AbstractEntity<Long> {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +18,12 @@ public class ReceivingNoteDetail extends AbstractEntity<Long> {
     @JsonIgnore
     @ManyToOne
     @NotNull(message = "receiving note must not be null")
-    @JoinColumn(foreignKey = @ForeignKey(name="FK_ReceivingNotes"))
-    private ReceivingNote receivingNote;
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_DeliveryNotes"))
+    private DeliveryNote deliveryNote;
 
     @ManyToOne
     @NotNull(message = "product must not be null")
-    @JoinColumn(foreignKey = @ForeignKey(name="FK_NoteDetail_Product"))
+    @JoinColumn(foreignKey = @ForeignKey(name="FK_DeliveryDetail_Product"))
     private Product product;
 
     @Column
@@ -41,16 +40,12 @@ public class ReceivingNoteDetail extends AbstractEntity<Long> {
         this.id = id;
     }
 
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
+    public DeliveryNote getDeliveryNote() {
+        return deliveryNote;
     }
 
-    public ReceivingNote getReceivingNote() {
-        return receivingNote;
-    }
-
-    public void setReceivingNote(ReceivingNote receivingNote) {
-        this.receivingNote = receivingNote;
+    public void setDeliveryNote(DeliveryNote deliveryNote) {
+        this.deliveryNote = deliveryNote;
     }
 
     public Product getProduct() {
@@ -59,5 +54,13 @@ public class ReceivingNoteDetail extends AbstractEntity<Long> {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 }

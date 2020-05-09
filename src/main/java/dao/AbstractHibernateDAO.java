@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -24,8 +25,19 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         this.entityClass = (Class<Entity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
+    public Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
+
     public Entity findById(ID id) {
         return sessionFactory.getCurrentSession().get(entityClass, id);
+    }
+
+    public long getTotalSize() {
+        Query<Long> query = sessionFactory.getCurrentSession()
+                .createQuery("select count(*) from " + entityClass.getSimpleName());
+        return query.uniqueResult();
     }
 
     public List<Entity> findAll() {
@@ -40,12 +52,6 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.list();
-    }
-
-    public long getTotalSize() {
-        Query<Long> query = sessionFactory.getCurrentSession()
-                .createQuery("select count(*) from " + entityClass.getSimpleName());
-        return query.uniqueResult();
     }
 
     public Entity create(Entity entity) {
@@ -82,7 +88,13 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         delete(entity);
     }
 
-    public Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
+
+    public List<Entity> searchPaginated(String field, String searchKey) {
+        Query<Entity> query = sessionFactory.getCurrentSession()
+                .createQuery("from " + entityClass.getSimpleName()
+                + " where str(" + field + ") like '%" + searchKey + "%'");
+
+        return query.list();
     }
+
 }

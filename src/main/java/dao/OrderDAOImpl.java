@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Qualifier("orderDAO")
 public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
 
     @Override
@@ -34,5 +33,11 @@ public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
             order.setOrderDetails(null);
         }
         return super.create(order);
+    }
+
+    @Override
+    public Order update(Order order) {
+        order.setOrderDetails(null);
+        return super.update(order);
     }
 }

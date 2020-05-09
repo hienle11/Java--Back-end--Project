@@ -23,16 +23,6 @@ public class EntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    // this handler is to handle illegal access on special entity
-    @ExceptionHandler
-    public ResponseEntity<EntityErrorResponse> handleEntityIllegalAccessException(EntityIllegalAccessException exc) {
-        EntityErrorResponse error = new EntityErrorResponse(
-                HttpStatus.FORBIDDEN.value(),
-                exc.getMessage(),
-                System.currentTimeMillis());
-        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
-    }
-
     // this handler is for all other exceptions
 //    @ExceptionHandler
 //    public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {

@@ -46,6 +46,9 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
 
     @PutMapping
     public Entity updateEntity(@RequestBody Entity entity) {
+        if (entity.getId() == null) {
+            throw new EntityNotFoundException("Please enter the id of the entity ");
+        }
         Entity theEntity = (Entity) getService().findById(entity.getId());
         if (theEntity == null) { // throw exception if the entity is not found in the database
             throw new EntityNotFoundException("The entity id not found - " + entity.getId());
@@ -69,5 +72,21 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
             throw new EntityNotFoundException("The entity id not found - " + entityId);
         }
         getService().deleteById(entityId);
+    }
+
+    @GetMapping("/search")
+    public Page<Entity> searchEntity(
+            @RequestParam String field, @RequestParam String searchKey,
+            @RequestParam(name = "size", required = false) Optional<Long> size,
+            @RequestParam(name = "page", required = false) Optional<Long> page) {
+
+        Long currentPage = page.orElse(Long.valueOf(1));
+        Long pageSize = size.orElse(Long.valueOf(5));
+
+        Page<Entity> entityPage = (Page<Entity>) getService().searchPaginated
+                (field, searchKey, PageRequest.of(currentPage.intValue() - 1, pageSize.intValue()));
+
+        return entityPage;
+
     }
 }

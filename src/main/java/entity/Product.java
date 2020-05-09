@@ -117,4 +117,5 @@ public class Product extends AbstractEntity<Long>
     public void setPrice(double price) {
         this.price = price;
     }
+
 }

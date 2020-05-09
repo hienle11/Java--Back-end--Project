@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-@Qualifier("staffService")
 public class StaffServiceImpl extends AbstractCRUDService<Staff, Long> implements GenericService<Staff, Long> {
 
     @Autowired

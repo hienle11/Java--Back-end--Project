@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@Qualifier("receivingNoteDAO")
 public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Long> {
 
     @Override
@@ -33,5 +32,11 @@ public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Lo
         }
 
         return super.create(receivingNote);
+    }
+
+    @Override
+    public ReceivingNote update(ReceivingNote receivingNote) {
+        receivingNote.setReceivingNoteDetails(null);
+        return super.update(receivingNote);
     }
 }
