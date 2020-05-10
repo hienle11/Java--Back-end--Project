@@ -64,14 +64,24 @@ public class CategoryAPITest {
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/categories")
                     .contentType(APPLICATION_JSON)
-                    .content("{\"name\": \"test\"}"))                       // id is not provided
+                    .content("{\"name\": \"test1\"}"))                       // id is not provided
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/categories/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":1,\"name\":\"test1\"}"));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/categories")
                         .contentType(APPLICATION_JSON)
-                        .content("{\"id\":\"1\",\"name\": \"test\"}"))      // id that already exists in the database
+                        .content("{\"id\":\"1\",\"name\": \"test2\"}"))      // id that already exists in the database
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/categories/2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":2,\"name\":\"test2\"}"));
     }
 
     @Test

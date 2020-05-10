@@ -74,76 +74,155 @@ public class ProductAPITest {
                 "        }\n" +
                 "    ],";
         expectedString = expectedString.replaceAll("[\n ]", "");
-        System.out.println(expectedString);
         Assert.assertTrue(resultBody.contains(expectedString));
     }
 
-//    @Test
-//    public void findByIdTest() throws Exception {
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.get("/categories/100"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().string("{\"id\":100,\"name\":\"motobikeTest\"}"));
-//
-//    }
-//
-//    @Test
-//    public void createTest() throws Exception {
-//
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.post("/categories")
-//                        .contentType(APPLICATION_JSON)
-//                        .content("{\"name\": \"test\"}"))                       // id is not provided
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.post("/categories")
-//                        .contentType(APPLICATION_JSON)
-//                        .content("{\"id\":\"1\",\"name\": \"test\"}"))      // id that already exists in the database
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//    }
-//
-//    @Test
-//    public void updateTest() throws Exception {
-//
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.put("/categories")
-//                        .contentType(APPLICATION_JSON)
-//                        .content("{\"id\": 100,\"name\": \"motobikeTestHasChanged\"}"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.get("/categories/100"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().string("{\"id\":100,\"name\":\"motobikeTestHasChanged\"}"));
-//    }
-//
-//    @Test
-//    public void deleteTest() throws Exception {
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.delete("/categories/999"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        MvcResult result = mockMvc.perform(
-//                MockMvcRequestBuilders.get("/categories/999"))
-//                .andExpect(MockMvcResultMatchers.status().isNotFound())
-//                .andReturn();
-//
-//        String resultBody = result.getResponse().getContentAsString();
-//        Assert.assertTrue(resultBody.contains("The entity id not found"));
-//    }
-//
-//    @Test
-//    public void searchTest() throws Exception {
-//        MvcResult result = mockMvc.perform(
-//                MockMvcRequestBuilders.get("/categories/search")
-//                        .param("field", "name")
-//                        .param("searchKey", "keyTest"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andReturn();
-//
-//        String resultBody = result.getResponse().getContentAsString();
-//        Assert.assertTrue(resultBody.contains("[{\"id\":103,\"name\":\"keyTest1\"},{\"id\":104,\"name\":\"keyTest2\"}]"));
-//    }
+    @Test
+    public void findByIdTest() throws Exception {
+        String expectedString = "{\n" +
+                "    \"id\": 103,\n" +
+                "    \"name\": \"camry\",\n" +
+                "    \"model\": \"model1234\",\n" +
+                "    \"brand\": \"toyota\",\n" +
+                "    \"company\": null,\n" +
+                "    \"price\": 44214.0,\n" +
+                "    \"description\": null,\n" +
+                "    \"category\": {\n" +
+                "        \"id\": 101,\n" +
+                "        \"name\": \"carTest\"\n" +
+                "    }\n" +
+                "}";
+        expectedString = expectedString.replaceAll("[\n ]", "");
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/products/103"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(expectedString));
+
+    }
+
+    @Test
+    public void createTest() throws Exception {
+        String newProduct = "{\n" +
+                // id is not provided
+                "    \"name\": \"testProduct\",\n" +
+                "    \"model\": \"model1234\",\n" +
+                "    \"brand\": \"toyota\",\n" +
+                "    \"company\": \"hehe\",\n" +
+                "    \"price\": 890214.1224,\n" +
+                "    \"description\": null,\n" +
+                "    \"category\": {\n" +
+                "        \"id\": 103\n" +
+                "    }\n" +
+                "}";
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/products")
+                        .contentType(APPLICATION_JSON)
+                        .content(newProduct))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        String expectedResult = "{\n" +
+                "    \"id\": 1,\n" +                    // id is added
+                "    \"name\": \"testProduct\",\n" +
+                "    \"model\": \"model1234\",\n" +
+                "    \"brand\": \"toyota\",\n" +
+                "    \"company\": \"hehe\",\n" +
+                "    \"price\": 890214.1224,\n" +
+                "    \"description\": null,\n" +
+                "    \"category\": {\n" +
+                "        \"id\": 103,\n" +
+                "        \"name\": \"keyTest2\"\n" +
+                "    }\n" +
+                "}";
+        expectedResult = expectedResult.replaceAll("[\n ]", "");
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/products/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(expectedResult));
+    }
+
+    @Test
+    public void updateTest() throws Exception {
+        String updatedProduct = "{\n" +
+                "    \"id\": 103,\n" +
+                "    \"name\": \"camryHasChanged\",\n" +
+               //   model is not provided, and expected not to become null
+                "    \"brand\": \"modelHasChanged\",\n" +
+                "    \"company\": null,\n" +
+                "    \"price\": 123,\n" +
+                "    \"description\": null,\n" +
+                "    \"category\": {\n" +
+                "        \"id\": 103\n" +
+                "    }\n" +
+                "}";
+
+        String resultProduct = "{\n" +
+                "    \"id\": 103,\n" +
+                "    \"name\": \"camryHasChanged\",\n" +
+                "    \"model\": \"model1234\",\n" +  // field not provided will not be updated
+                "    \"brand\": \"modelHasChanged\",\n" +
+                "    \"company\": null,\n" +
+                "    \"price\": 123.0,\n" +
+                "    \"description\": null,\n" +
+                "    \"category\": {\n" +
+                "        \"id\": 103,\n" +
+                "        \"name\": \"keyTest2\"\n" +
+                "    }\n" +
+                "}";
+        resultProduct = resultProduct.replaceAll("[\n ]", "");
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.put("/products")
+                        .contentType(APPLICATION_JSON)
+                        .content(updatedProduct))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/products/103"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(resultProduct));
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/products/999"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/products/999"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andReturn();
+
+        String resultBody = result.getResponse().getContentAsString();
+        Assert.assertTrue(resultBody.contains("The entity id not found"));
+    }
+
+    @Test
+    public void searchTest() throws Exception {
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/products/search")
+                        .param("field", "price")
+                        .param("searchKey", "777"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String resultBody = result.getResponse().getContentAsString();
+
+        String resultString = "{\n" +
+                "            \"id\": 102,\n" +
+                "            \"name\": \"exciter\",\n" +
+                "            \"model\": \"model2020\",\n" +
+                "            \"brand\": \"yamaha\",\n" +
+                "            \"company\": null,\n" +
+                "            \"price\": 777.0,\n" +
+                "            \"description\": null,\n" +
+                "            \"category\": {\n" +
+                "                \"id\": 100,\n" +
+                "                \"name\": \"motobikeTest\"\n" +
+                "            }\n" +
+                "        }";
+        resultString = resultString.replaceAll("[\n ]", "");
+        Assert.assertTrue(resultBody.contains(resultString));
+    }
 
 }

@@ -12,8 +12,6 @@ public interface GenericService<Entity extends AbstractEntity, ID extends Serial
 
     Entity findById(ID id);
 
-    List<Entity> findAll();
-
     Entity create(Entity entity);
 
     Entity update(Entity entity);

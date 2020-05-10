@@ -45,16 +45,42 @@ alter table sales_invoice add constraint FK_Sales_Staff foreign key (staff_id) r
 alter table sales_invoice_details add constraint FK_Sales_Product foreign key (product_id) references product;
 alter table sales_invoice_details add constraint FK_Sales_Invoice foreign key (salesInvoice_id) references sales_invoice;
 
+
 -- populate category table
 insert into category(id, name) values (100, 'motobikeTest');
 insert into category(id, name) values (101, 'carTest');
-insert into category(id, name) values (103, 'keyTest1');
-insert into category(id, name) values (104, 'keyTest2');
+insert into category(id, name) values (102, 'keyTest1');
+insert into category(id, name) values (103, 'keyTest2');
 insert into category(id, name) values (999, 'toDelete');
 
 -- populate product table
 insert into product(id, name, price, category_id) values (100, 'winner', 1.5, 100);
 insert into product(id, name, price, category_id) values (101, 'bmw', 25, 101);
+insert into product(id, name, brand, model, price, category_id) values (102, 'exciter', 'yamaha', 'model2020', 777, 100);
+insert into product(id, name, brand, model, price, category_id) values (103, 'camry', 'toyota', 'model1234', 44214, 101);
+insert into product(id, name, brand, model, price, category_id) values (999, '123x', 'suzuki', 'model2018', 24424, 103);
+
+-- populate provider table
+insert into provider(id, name, phone) values (100, 'david', '+123');
+insert into provider(id, name, phone) values (101, 'edward', '+111');
+insert into provider(id, name, phone) values (102, 'alex', '+789');
+insert into provider(id, name, phone) values (103, 'alison', '+111');
+insert into provider(id, name, phone) values (999, 'hien', '+222');
+
+-- populate customer table
+insert into customer(id, name, fax) values (100, 'edison', '1111');
+insert into customer(id, name, fax) values (101, 'koke', '2222');
+insert into customer(id, name, fax) values (102, 'messi', '3333');
+insert into customer(id, name, fax) values (103, 'ronaldo', '4444');
+insert into customer(id, name, fax) values (999, 'congphuong', '555');
+
+-- populate staff table
+insert into staff(id, name, email) values (100, 'ladygaga', 'abc@gmail.com');
+insert into staff(id, name, email) values (101, 'katy', 'xyz@gmail.com');
+insert into staff(id, name, email) values (102, 'maroon5', 'xyz@gmail.com');
+insert into staff(id, name, email) values (103, 'adam', 'asd@gmail.com');
+insert into staff(id, name, email) values (999, 'erik', 'qwe@gmail.com');
+
 
 
 

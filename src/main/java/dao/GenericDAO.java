@@ -10,8 +10,6 @@ public interface GenericDAO<Entity extends AbstractEntity, ID> {
 
     Entity findById(ID id);
 
-    List<Entity> findAll();
-
     Entity create(Entity entity);
 
     Entity update(Entity entity);

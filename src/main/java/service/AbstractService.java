@@ -23,10 +23,6 @@ public abstract class AbstractService<Entity extends AbstractEntity, ID extends 
         return (Entity) getDao().findById(id);
     }
 
-    public List<Entity> findAll() {
-        return getDao().findAll();
-    }
-
     public Page<Entity> findPaginated(Pageable pageable) {
 
         int pageSize = pageable.getPageSize();

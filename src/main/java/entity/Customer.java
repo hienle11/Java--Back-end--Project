@@ -17,7 +17,6 @@ public class Customer extends AbstractEntity<Long> {
     private String name;
 
     @Column
-    @NotBlank(message = "customer address must not be blank")
     private String address;
 
     @Column
@@ -30,7 +29,6 @@ public class Customer extends AbstractEntity<Long> {
     private String email;
 
     @Column
-    @NotBlank(message = "customer contact person must not be blank")
     private String contactPerson;
 
     public Long getId() {

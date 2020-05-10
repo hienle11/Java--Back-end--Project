@@ -40,12 +40,6 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         return query.uniqueResult();
     }
 
-    public List<Entity> findAll() {
-        Query<Entity> query = sessionFactory.getCurrentSession()
-                .createQuery("from " + entityClass.getSimpleName());
-        return query.getResultList();
-    }
-
     public List<Entity> findByPage(int limit, int offset) {
         Query<Entity> query = sessionFactory.getCurrentSession()
                 .createQuery("from " + entityClass.getSimpleName());
