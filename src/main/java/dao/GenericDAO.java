@@ -16,8 +16,6 @@ public interface GenericDAO<Entity extends AbstractEntity, ID> {
 
     Entity update(Entity entity);
 
-    void delete(Entity entity);
-
     void deleteById(ID id);
 
     List<Entity> findByPage(int limit, int offset);

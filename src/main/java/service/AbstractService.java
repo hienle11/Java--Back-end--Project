@@ -49,10 +49,6 @@ public abstract class AbstractService<Entity extends AbstractEntity, ID extends 
         return (Entity) getDao().update(entity);
     }
 
-    public void delete(Entity entity) {
-        getDao().delete(entity);
-    }
-
     public void deleteById(ID id) {
         getDao().deleteById(id);
     }

@@ -41,6 +41,7 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
 
     @PostMapping
     public Entity createEntity(@RequestBody Entity entity) {
+        entity.setId(null);
         return (Entity) getService().create(entity);
     }
 
@@ -54,15 +55,6 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
             throw new EntityNotFoundException("The entity id not found - " + entity.getId());
         }
         return (Entity) getService().update(entity);
-    }
-
-    @DeleteMapping
-    public void deleteEntity(@RequestBody Entity entity) {
-        Entity theEntity = (Entity) getService().findById(entity.getId());
-        if (theEntity == null) { // throw exception if the entity is not found in the database
-            throw new EntityNotFoundException("The entity id not found - " + entity.getId());
-        }
-        getService().delete(entity);
     }
 
     @DeleteMapping("/{entityId}")

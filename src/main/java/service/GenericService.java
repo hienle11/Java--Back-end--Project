@@ -18,8 +18,6 @@ public interface GenericService<Entity extends AbstractEntity, ID extends Serial
 
     Entity update(Entity entity);
 
-    void delete(Entity entity);
-
     void deleteById(ID id);
 
     Page<Entity> findPaginated(Pageable pageable);

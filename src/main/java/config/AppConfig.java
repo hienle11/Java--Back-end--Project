@@ -48,6 +48,8 @@ public class AppConfig {
         return sessionFactoryBean;
     }
 
+
+
     @Bean
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
         HibernateTransactionManager tx = new HibernateTransactionManager(sessionFactory);

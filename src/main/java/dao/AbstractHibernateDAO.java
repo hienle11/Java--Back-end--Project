@@ -79,13 +79,9 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
         }
     }
 
-    public void delete(Entity entity) {
-        sessionFactory.getCurrentSession().delete(entity);
-    }
-
     public void deleteById(ID id) {
         Entity entity = findById(id);
-        delete(entity);
+        sessionFactory.getCurrentSession().delete(entity);
     }
 
 

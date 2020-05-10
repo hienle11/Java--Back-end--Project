@@ -60,4 +60,8 @@ public class ReceivingNoteDetail extends AbstractEntity<Long> {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public long getQuantity() {
+        return quantity;
+    }
 }
