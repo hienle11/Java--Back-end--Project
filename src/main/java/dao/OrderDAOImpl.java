@@ -3,16 +3,31 @@ package dao;
 import entity.*;
 import entity.Order;
 import entity.OrderDetail;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
 
     @Override
     public Order create(Order order) {
+        preProcess(order);
+        return super.create(order);
+    }
+
+    @Override
+    public Order update(Order order) {
+        preProcess(order);
+        return super.update(order);
+    }
+
+    private void preProcess(Order order) {
         List<OrderDetail> orderDetails = order.getOrderDetails();
         if (orderDetails != null && orderDetails.size() > 0)
         {
@@ -32,12 +47,26 @@ public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
         } else {
             order.setOrderDetails(null);
         }
-        return super.create(order);
     }
 
     @Override
-    public Order update(Order order) {
-        order.setOrderDetails(null);
-        return super.update(order);
+    public List<Order> searchPaginated(String field, String searchKey) {
+        if (field.equalsIgnoreCase("product")) {
+            Query<OrderDetail> query = sessionFactory.getCurrentSession()
+                    .createQuery("from OrderDetail "
+                            + " where str(" + field + ") like '%" + searchKey + "%'");
+            List<OrderDetail> orderDetailResults = query.getResultList();
+            Set<Long> orderIds = new HashSet<>();
+            for(OrderDetail orderDetail: orderDetailResults) {
+                orderIds.add(orderDetail.getOrder().getId());
+            }
+            List<Order> result = new ArrayList<>();
+            for(Long eachId: orderIds) {
+                result.add(findById(eachId));
+            }
+            return result;
+        } else {
+            return super.searchPaginated(field, searchKey);
+        }
     }
 }

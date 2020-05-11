@@ -53,13 +53,6 @@ insert into category(id, name) values (102, 'keyTest1');
 insert into category(id, name) values (103, 'keyTest2');
 insert into category(id, name) values (999, 'toDelete');
 
--- populate product table
-insert into product(id, name, price, category_id) values (100, 'winner', 1.5, 100);
-insert into product(id, name, price, category_id) values (101, 'bmw', 25, 101);
-insert into product(id, name, brand, model, price, category_id) values (102, 'exciter', 'yamaha', 'model2020', 777, 100);
-insert into product(id, name, brand, model, price, category_id) values (103, 'camry', 'toyota', 'model1234', 44214, 101);
-insert into product(id, name, brand, model, price, category_id) values (999, '123x', 'suzuki', 'model2018', 24424, 103);
-
 -- populate provider table
 insert into provider(id, name, phone) values (100, 'david', '+123');
 insert into provider(id, name, phone) values (101, 'edward', '+111');
@@ -81,9 +74,69 @@ insert into staff(id, name, email) values (102, 'maroon5', 'xyz@gmail.com');
 insert into staff(id, name, email) values (103, 'adam', 'asd@gmail.com');
 insert into staff(id, name, email) values (999, 'erik', 'qwe@gmail.com');
 
+-- populate product table
+insert into product(id, name, price, category_id) values (100, 'winner', 2.5, 100);
+insert into product(id, name, price, category_id) values (101, 'bmw', 25, 101);
+insert into product(id, name, brand, model, price, category_id) values (102, 'exciter', 'yamaha', 'model2020', 25, 100);
+insert into product(id, name, brand, model, price, category_id) values (103, 'camry', 'toyota', 'model1234', 15, 101);
+insert into product(id, name, brand, model, price, category_id) values (999, '123x', 'suzuki', 'model2018', 15, 103);
 
+-- populate order_to_provider table
+insert into order_to_provider(id, date, provider_id, staff_id) values (100, '2020-05-09', 101, 102);
+insert into order_to_provider(id, date, provider_id, staff_id) values (101, '2020-05-06', 100, 101);
+insert into order_to_provider(id, date, provider_id, staff_id) values (102, '2019-04-11', 103, 100);
+insert into order_to_provider(id, date, provider_id, staff_id) values (103, '2019-05-11', 100, 102);
+insert into order_to_provider(id, date, provider_id, staff_id) values (999, '2020-05-11', 100, 102);
 
+-- populate order_detail
+insert into order_detail(id, order_id, product_id, quantity, price) values (1001, 100, 101, 2, 50);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1002, 100, 102, 1, 25);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1003, 100, 103, 3, 45);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1011, 101, 101, 10, 250);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1012, 101, 102, 20, 500);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1021, 102, 103, 30, 450);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1031, 103, 103, 1, 15);
+insert into order_detail(id, order_id, product_id, quantity, price) values (1032, 103, 101, 5, 7.5);
+insert into order_detail(id, order_id, product_id, quantity, price) values (9991, 999, 102, 10, 250);
+insert into order_detail(id, order_id, product_id, quantity, price) values (9992, 999, 103, 15, 225);
 
+-- populate receiving note detail
+insert into inventory_receiving_note(id, date, order_id, staff_id) values (100, '2020-05-11', 100, 103);
+insert into inventory_receiving_note(id, date, order_id, staff_id) values (101, '2020-05-15', 101, 103);
+insert into inventory_receiving_note(id, date, order_id, staff_id) values (102, '2019-05-07', 102, 103);
+insert into inventory_receiving_note(id, date, order_id, staff_id) values (103, '2019-05-11', 103, 103);
+insert into inventory_receiving_note(id, date, order_id, staff_id) values (999, '2020-07-11', 999, 103);
+
+-- populate receiving note details
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1001, 100, 101, 2);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1002, 100, 102, 1);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1003, 100, 103, 3);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1011, 101, 101, 10);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1012, 101, 102, 20);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1021, 102, 103, 30);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1031, 103, 103, 1);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (1032, 103, 101, 5);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (9991, 999, 102, 10);
+insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (9992, 999, 103, 15);
+
+-- populate delivery note
+insert into inventory_delivery_note(id) values (100);
+insert into inventory_delivery_note(id) values (101);
+insert into inventory_delivery_note(id) values (102);
+insert into inventory_delivery_note(id) values (103);
+insert into inventory_delivery_note(id) values (999);
+
+-- populate delivery note detail
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1001, 100, 101, 2);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1002, 100, 100, 4);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1003, 100, 101, 6);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1011, 101, 102, 8);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1012, 101, 103, 124);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1021, 102, 101, 33);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1031, 103, 102, 4);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1032, 103, 100, 12);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9991, 999, 101, 5);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9992, 999, 100, 11);
 
 
 

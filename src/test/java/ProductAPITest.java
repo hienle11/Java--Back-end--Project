@@ -52,7 +52,7 @@ public class ProductAPITest {
                 "            \"model\": null,\n" +
                 "            \"brand\": null,\n" +
                 "            \"company\": null,\n" +
-                "            \"price\": 1.5,\n" +
+                "            \"price\": 2.5,\n" +
                 "            \"description\": null,\n" +
                 "            \"category\": {\n" +
                 "                \"id\": 100,\n" +
@@ -85,7 +85,7 @@ public class ProductAPITest {
                 "    \"model\": \"model1234\",\n" +
                 "    \"brand\": \"toyota\",\n" +
                 "    \"company\": null,\n" +
-                "    \"price\": 44214.0,\n" +
+                "    \"price\": 15.0,\n" +
                 "    \"description\": null,\n" +
                 "    \"category\": {\n" +
                 "        \"id\": 101,\n" +
@@ -202,25 +202,40 @@ public class ProductAPITest {
         MvcResult result = mockMvc.perform(
                 MockMvcRequestBuilders.get("/products/search")
                         .param("field", "price")
-                        .param("searchKey", "777"))
+                        .param("searchKey", "25"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
         String resultBody = result.getResponse().getContentAsString();
 
-        String resultString = "{\n" +
+        String resultString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 101,\n" +
+                "            \"name\": \"bmw\",\n" +
+                "            \"model\": null,\n" +
+                "            \"brand\": null,\n" +
+                "            \"company\": null,\n" +
+                "            \"price\": 25.0,\n" +
+                "            \"description\": null,\n" +
+                "            \"category\": {\n" +
+                "                \"id\": 101,\n" +
+                "                \"name\": \"carTest\"\n" +
+                "            }\n" +
+                "        },\n" +
+                "        {\n" +
                 "            \"id\": 102,\n" +
                 "            \"name\": \"exciter\",\n" +
                 "            \"model\": \"model2020\",\n" +
                 "            \"brand\": \"yamaha\",\n" +
                 "            \"company\": null,\n" +
-                "            \"price\": 777.0,\n" +
+                "            \"price\": 25.0,\n" +
                 "            \"description\": null,\n" +
                 "            \"category\": {\n" +
                 "                \"id\": 100,\n" +
                 "                \"name\": \"motobikeTest\"\n" +
                 "            }\n" +
-                "        }";
+                "        }\n" +
+                "    ],";
         resultString = resultString.replaceAll("[\n ]", "");
         Assert.assertTrue(resultBody.contains(resultString));
     }
