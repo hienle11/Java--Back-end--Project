@@ -30,15 +30,7 @@ public class SalesInvoiceServiceImpl extends AbstractService<SalesInvoice, Long>
     }
 
     public Page<SalesInvoice> searchByPeriod(String startDate, String endDate, Pageable pageable) {
-
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-
-        List<SalesInvoice> paginatedList = customSalesInvoiceDAO.searchByPeriod(startDate, endDate, pageSize, startItem);
-        Page<SalesInvoice> entityPage
-                = new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), 100);
-
-        return entityPage;
+        List<SalesInvoice> wholeResultList = customSalesInvoiceDAO.searchByPeriod(startDate, endDate);
+        return getPage(wholeResultList, pageable);
     }
 }

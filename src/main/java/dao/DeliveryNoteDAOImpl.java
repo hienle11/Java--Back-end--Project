@@ -1,9 +1,6 @@
 package dao;
 
-import entity.DeliveryNote;
-import entity.DeliveryNoteDetail;
-import entity.Product;
-import entity.ReceivingNote;
+import entity.*;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -14,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long> {
+public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long> implements DeliveryNoteDAO {
     @Override
     public DeliveryNote create(DeliveryNote deliveryNote) {
         preProcess(deliveryNote);
@@ -41,7 +38,7 @@ public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long
     }
 
     @Override
-    public List<DeliveryNote> searchPaginated(String field, String searchKey, int limit, int offset) {
+    public List<DeliveryNote> searchPaginated(String field, String searchKey) {
         if (field.equalsIgnoreCase("product")) {
             Query<DeliveryNoteDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from DeliveryNoteDetail "
@@ -52,20 +49,20 @@ public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long
                 deliveryNoteIds.add(deliveryNoteDetail.getDeliveryNote().getId());
             }
             List<DeliveryNote> result = new ArrayList<>();
-            int count = 0;
             for (Long eachId : deliveryNoteIds) {
-                count++;
-                if (count > offset) {
-                    result.add(findById(eachId));
-                    limit--;
-                }
-                if (limit == 0) {
-                    break;
-                }
+                result.add(findById(eachId));
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey, limit, offset);
+            return super.searchPaginated(field, searchKey);
         }
+    }
+
+    @Override
+    public List<DeliveryNote> searchByPeriod(String startDate, String endDate) {
+        Query<DeliveryNote> query = sessionFactory.getCurrentSession()
+                .createQuery("from DeliveryNote"
+                        + " where (date >= '" + startDate + "' AND date <= '" + endDate + "')");
+        return query.list();
     }
 }

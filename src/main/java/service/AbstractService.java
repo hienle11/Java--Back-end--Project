@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,15 +52,28 @@ public abstract class AbstractService<Entity extends AbstractEntity, ID extends 
     }
 
     public Page<Entity> searchPaginated(String field, String searchKey, Pageable pageable) {
+        List<Entity> wholeResultList = getDao().searchPaginated(field, searchKey);
+        return getPage(wholeResultList, pageable);
+    }
 
+    protected Page<Entity> getPage(List<Entity> wholeList, Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
 
-        List<Entity> paginatedList = getDao().searchPaginated(field, searchKey, pageSize, startItem);
-        Page<Entity> entityPage
-                = new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), 100);
-
-        return entityPage;
+        List<Entity> paginatedList = new ArrayList<>();
+        int count = 0;
+        int limit = pageSize;
+        for (Entity eachEntity: wholeList) {
+            count++;
+            if (count >= startItem) {
+                paginatedList.add(eachEntity);
+                limit--;
+            }
+            if (limit == 0) {
+                break;
+            }
+        }
+        return new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), wholeList.size());
     }
 }

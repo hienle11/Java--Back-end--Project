@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Long> {
+public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Long> implements ReceivingNoteDAO {
 
     @Override
     public ReceivingNote create(ReceivingNote receivingNote) {
@@ -45,7 +45,7 @@ public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Lo
     }
 
     @Override
-    public List<ReceivingNote> searchPaginated(String field, String searchKey, int limit, int offset) {
+    public List<ReceivingNote> searchPaginated(String field, String searchKey) {
         if (field.equalsIgnoreCase("product")) {
             Query<ReceivingNoteDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from ReceivingNoteDetail "
@@ -56,20 +56,20 @@ public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Lo
                 receivingNoteIds.add(receivingNoteDetail.getReceivingNote().getId());
             }
             List<ReceivingNote> result = new ArrayList<>();
-            int count = 0;
             for(Long eachId: receivingNoteIds) {
-                count++;
-                if (count > offset) {
                     result.add(findById(eachId));
-                    limit--;
-                }
-                if (limit == 0) {
-                    break;
-                }
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey, limit, offset);
+            return super.searchPaginated(field, searchKey);
         }
+    }
+
+    @Override
+    public List<ReceivingNote> searchByPeriod(String startDate, String endDate) {
+        Query<ReceivingNote> query = sessionFactory.getCurrentSession()
+                .createQuery("from ReceivingNote"
+                        + " where (date >= '" + startDate + "' AND date <= '" + endDate + "')");
+        return query.list();
     }
 }

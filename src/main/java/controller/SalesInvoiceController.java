@@ -36,7 +36,7 @@ public class SalesInvoiceController extends AbstractCRUDController<SalesInvoice,
         return (SalesInvoice) salesInvoiceService.update((SalesInvoice) salesInvoiceService.findById(salesInvoiceId));
     }
 
-    @PutMapping("/search-by-period")
+    @GetMapping("/search-by-period")
     public Page<SalesInvoice> searchByPeriod(
             @RequestParam String startDate, @RequestParam String endDate,
             @RequestParam(name = "size", required = false) Optional<Long> size,

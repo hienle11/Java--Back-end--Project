@@ -31,7 +31,7 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
     }
 
     @Override
-    public List<SalesInvoice> searchPaginated(String field, String searchKey, int limit, int offset) {
+    public List<SalesInvoice> searchPaginated(String field, String searchKey) {
         if (field.equalsIgnoreCase("product")) {
             Query<SalesInvoiceDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from SalesInvoiceDetail "
@@ -42,20 +42,12 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
                 salesInvoiceIds.add(salesInvoiceDetail.getSalesInvoice().getId());
             }
             List<SalesInvoice> result = new ArrayList<>();
-            int count = 0;
             for(Long eachId: salesInvoiceIds) {
-                count++;
-                if (count > offset) {
                     result.add(findById(eachId));
-                    limit--;
-                }
-                if (limit == 0) {
-                    break;
-                }
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey, limit, offset);
+            return super.searchPaginated(field, searchKey);
         }
     }
 
@@ -105,5 +97,13 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
 
 
 
+    }
+
+    @Override
+    public List<SalesInvoice> searchByPeriod(String startDate, String endDate) {
+        Query<SalesInvoice> query = sessionFactory.getCurrentSession()
+                .createQuery("from SalesInvoice "
+                        + " where (date >= '" + startDate + "' AND date <= '" + endDate + "')");
+        return query.list();
     }
 }
