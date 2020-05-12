@@ -55,9 +55,10 @@ public class DeliveryNoteAPITest {
                 .andReturn();
         String resultBody = result.getResponse().getContentAsString();
         System.out.println(resultBody);
-        String expectedString = "\"content\": [\n" +
+        String expectedString = " \"content\": [\n" +
                 "        {\n" +
                 "            \"id\": 100,\n" +
+                "            \"date\": \"11-06-2019\",\n" +
                 "            \"deliveryNoteDetails\": [\n" +
                 "                {\n" +
                 "                    \"id\": 1001,\n" +
@@ -114,6 +115,7 @@ public class DeliveryNoteAPITest {
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 101,\n" +
+                "            \"date\": \"17-06-2019\",\n" +
                 "            \"deliveryNoteDetails\": [\n" +
                 "                {\n" +
                 "                    \"id\": 1011,\n" +
@@ -160,6 +162,7 @@ public class DeliveryNoteAPITest {
     public void findByIdTest() throws Exception {
         String expectedString = "{\n" +
                 "    \"id\": 103,\n" +
+                "    \"date\": \"27-05-2019\",\n" +
                 "    \"deliveryNoteDetails\": [\n" +
                 "        {\n" +
                 "            \"id\": 1031,\n" +
@@ -207,6 +210,7 @@ public class DeliveryNoteAPITest {
     @Test
     public void createTest() throws Exception {
         String newDeliveryNote = "{\n" +
+                // date is not provided
                 "    \"deliveryNoteDetails\": [\n" +
                 "        {\n" +
                 "            \"product\": {\n" +
@@ -232,6 +236,7 @@ public class DeliveryNoteAPITest {
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // get the current date
         String expectedResult =  "{\n" +
                 "    \"id\": 1,\n" +
+                "    \"date\": \"" + date + "\",\n" +
                 "    \"deliveryNoteDetails\": [\n" +
                 "        {\n" +
                 "            \"id\": 1,\n" +
@@ -300,6 +305,7 @@ public class DeliveryNoteAPITest {
 
         String resultDeliveryNote = "{\n" +
                 "    \"id\": 103,\n" +
+                "    \"date\": \"27-05-2019\",\n" +
                 "    \"deliveryNoteDetails\": [\n" +
                 "        {\n" +
                 "            \"id\": 1032,\n" +
@@ -410,9 +416,10 @@ public class DeliveryNoteAPITest {
 
         String resultBody = result.getResponse().getContentAsString();
 
-        String resultString = "[\n" +
+        String resultString = " \"content\": [\n" +
                 "        {\n" +
                 "            \"id\": 101,\n" +
+                "            \"date\": \"17-06-2019\",\n" +
                 "            \"deliveryNoteDetails\": [\n" +
                 "                {\n" +
                 "                    \"id\": 1011,\n" +
@@ -447,6 +454,60 @@ public class DeliveryNoteAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 124\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ],";
+        resultString = resultString.replaceAll("[\n ]", "");
+        Assert.assertTrue(resultBody.contains(resultString));
+
+        result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/delivery-notes/search")
+                        .param("field", "date")
+                        .param("searchKey", "2019-05-27"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        resultBody = result.getResponse().getContentAsString();
+
+        resultString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 103,\n" +
+                "            \"date\": \"27-05-2019\",\n" +
+                "            \"deliveryNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1031,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 102,\n" +
+                "                        \"name\": \"exciter\",\n" +
+                "                        \"model\": \"model2020\",\n" +
+                "                        \"brand\": \"yamaha\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 100,\n" +
+                "                            \"name\": \"motobikeTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 4\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1032,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 100,\n" +
+                "                        \"name\": \"winner\",\n" +
+                "                        \"model\": null,\n" +
+                "                        \"brand\": null,\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 2.5,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 100,\n" +
+                "                            \"name\": \"motobikeTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 12\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +

@@ -1,7 +1,11 @@
 package entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,6 +16,11 @@ public class DeliveryNote extends AbstractEntity<Long>
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @NotNull(message = "delivery note details must be provided")
     @OneToMany(mappedBy = "deliveryNote", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -31,5 +40,13 @@ public class DeliveryNote extends AbstractEntity<Long>
 
     public void setDeliveryNoteDetails(List<DeliveryNoteDetail> deliveryNoteDetails) {
         this.deliveryNoteDetails = deliveryNoteDetails;
+    }
+
+    public String getDate() {
+        return new SimpleDateFormat("dd-MM-yyyy").format(date);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

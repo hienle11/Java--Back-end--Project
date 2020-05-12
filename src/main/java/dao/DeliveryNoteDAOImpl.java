@@ -42,26 +42,30 @@ public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long
 
     @Override
     public List<DeliveryNote> searchPaginated(String field, String searchKey, int limit, int offset) {
-        Query<DeliveryNoteDetail> query = sessionFactory.getCurrentSession()
-                .createQuery("from DeliveryNoteDetail "
-                        + " where str(" + field + ") like '%" + searchKey + "%'");
-        List<DeliveryNoteDetail> noteDetailResults = query.getResultList();
-        Set<Long> deliveryNoteIds = new HashSet<>();
-        for(DeliveryNoteDetail deliveryNoteDetail: noteDetailResults) {
-            deliveryNoteIds.add(deliveryNoteDetail.getDeliveryNote().getId());
-        }
-        List<DeliveryNote> result = new ArrayList<>();
-        int count = 0;
-        for(Long eachId: deliveryNoteIds) {
-            count++;
-            if (count > offset) {
-                result.add(findById(eachId));
-                limit--;
+        if (field.equalsIgnoreCase("product")) {
+            Query<DeliveryNoteDetail> query = sessionFactory.getCurrentSession()
+                    .createQuery("from DeliveryNoteDetail "
+                            + " where str(" + field + ") like '%" + searchKey + "%'");
+            List<DeliveryNoteDetail> noteDetailResults = query.list();
+            Set<Long> deliveryNoteIds = new HashSet<>();
+            for (DeliveryNoteDetail deliveryNoteDetail : noteDetailResults) {
+                deliveryNoteIds.add(deliveryNoteDetail.getDeliveryNote().getId());
             }
-            if (limit == 0) {
-                break;
+            List<DeliveryNote> result = new ArrayList<>();
+            int count = 0;
+            for (Long eachId : deliveryNoteIds) {
+                count++;
+                if (count > offset) {
+                    result.add(findById(eachId));
+                    limit--;
+                }
+                if (limit == 0) {
+                    break;
+                }
             }
+            return result;
+        } else {
+            return super.searchPaginated(field, searchKey, limit, offset);
         }
-        return result;
     }
 }

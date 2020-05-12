@@ -16,7 +16,7 @@ drop table if exists category;
 -- create all the tables
 create table category (id  bigserial not null, name varchar(255), primary key (id));
 create table customer (id  bigserial not null, address varchar(255), contactPerson varchar(255), email varchar(255), fax varchar(255), name varchar(255), phone varchar(255), primary key (id));
-create table inventory_delivery_note (id  bigserial not null, primary key (id));
+create table inventory_delivery_note (id  bigserial not null, date date, primary key (id));
 create table inventory_delivery_note_details (id  bigserial not null, quantity int8 not null check (quantity>=1), deliveryNote_id int8 not null, product_id int8 not null, primary key (id));
 create table inventory_receiving_note (id  bigserial not null, date date, order_id int8 not null, staff_id int8 not null, primary key (id));
 create table inventory_receiving_note_details (id  bigserial not null, quantity int8 not null check (quantity>=1), product_id int8 not null, receivingNote_id int8 not null, primary key (id));
@@ -120,11 +120,11 @@ insert into inventory_receiving_note_details(id, receivingNote_id, product_id, q
 insert into inventory_receiving_note_details(id, receivingNote_id, product_id, quantity) values (9992, 999, 103, 15);
 
 -- populate delivery note
-insert into inventory_delivery_note(id) values (100);
-insert into inventory_delivery_note(id) values (101);
-insert into inventory_delivery_note(id) values (102);
-insert into inventory_delivery_note(id) values (103);
-insert into inventory_delivery_note(id) values (999);
+insert into inventory_delivery_note(id, date) values (100, '2019-06-11');
+insert into inventory_delivery_note(id, date) values (101, '2019-06-17');
+insert into inventory_delivery_note(id, date) values (102, '2019-06-21');
+insert into inventory_delivery_note(id, date) values (103, '2019-05-27');
+insert into inventory_delivery_note(id, date) values (999, '2019-05-29');
 
 -- populate delivery note detail
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1001, 100, 101, 2);

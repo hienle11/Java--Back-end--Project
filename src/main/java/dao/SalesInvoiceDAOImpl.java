@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long> {
+public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long> implements SalesInvoiceDAO{
 
     @Override
     public SalesInvoice create(SalesInvoice salesInvoice) {

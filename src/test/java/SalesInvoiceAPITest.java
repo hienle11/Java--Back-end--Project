@@ -634,6 +634,54 @@ public class SalesInvoiceAPITest {
         resultString = resultString.replaceAll("[\n ]", "");
         Assert.assertTrue(resultBody.contains(resultString));
 
+        result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/sales-invoices/search")
+                        .param("field", "date")
+                        .param("searchKey", "2019-06-21"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        resultBody = result.getResponse().getContentAsString();
+
+        resultString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 102,\n" +
+                "            \"date\": \"21-06-2019\",\n" +
+                "            \"staff\": \"katy\",\n" +
+                "            \"customer\": {\n" +
+                "                \"id\": 100,\n" +
+                "                \"name\": \"edison\",\n" +
+                "                \"address\": null,\n" +
+                "                \"phone\": null,\n" +
+                "                \"fax\": \"1111\",\n" +
+                "                \"email\": null,\n" +
+                "                \"contactPerson\": null\n" +
+                "            },\n" +
+                "            \"total\": 100.0,\n" +
+                "            \"salesInvoiceDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1021,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 102,\n" +
+                "                        \"name\": \"exciter\",\n" +
+                "                        \"model\": \"model2020\",\n" +
+                "                        \"brand\": \"yamaha\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 100,\n" +
+                "                            \"name\": \"motobikeTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 4,\n" +
+                "                    \"price\": 100.0\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ],";
+        resultString = resultString.replaceAll("[\n ]", "");
+        Assert.assertTrue(resultBody.contains(resultString));
 
     }
 }
