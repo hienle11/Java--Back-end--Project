@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Repository;
 
@@ -104,6 +105,15 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
         Query<SalesInvoice> query = sessionFactory.getCurrentSession()
                 .createQuery("from SalesInvoice "
                         + " where (date >= '" + startDate + "' AND date <= '" + endDate + "')");
+        return query.list();
+    }
+
+    @Override
+    public List<SalesInvoice> searchByFieldAndPeriod(String startDate, String endDate, String field, String searchKey) {
+        Query<SalesInvoice> query = sessionFactory.getCurrentSession()
+                .createQuery("from SalesInvoice "
+                        + " where (date >= '" + startDate + "' AND date <= '" + endDate + "'"
+                        + " AND " + field + "=" + searchKey + ")");
         return query.list();
     }
 }

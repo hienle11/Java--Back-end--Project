@@ -33,4 +33,9 @@ public class ReceivingNoteServiceImpl extends AbstractService<ReceivingNote, Lon
         List<ReceivingNote> wholeResultList = customReceivingNoteDAO.searchByPeriod(startDate, endDate);
         return getPage(wholeResultList, pageable);
     }
+
+    @Override
+    public List<ReceivingNote> searchByPeriod(String startDate, String endDate) {
+        return customReceivingNoteDAO.searchByPeriod(startDate, endDate);
+    }
 }

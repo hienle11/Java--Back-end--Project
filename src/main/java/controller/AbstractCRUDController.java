@@ -26,8 +26,8 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
 
     @GetMapping
     public Page<Entity> findEntitiesByPage(
-            @RequestParam(name = "size", required = false) Optional<Long> size,
-            @RequestParam(name = "page", required = false) Optional<Long> page) {
+            @RequestParam(required = false) Optional<Long> size,
+            @RequestParam(required = false) Optional<Long> page) {
 
         Long currentPage = page.orElse(Long.valueOf(1));
         Long pageSize = size.orElse(Long.valueOf(5));
@@ -69,8 +69,8 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
     @GetMapping("/search")
     public Page<Entity> searchEntity(
             @RequestParam String field, @RequestParam String searchKey,
-            @RequestParam(name = "size", required = false) Optional<Long> size,
-            @RequestParam(name = "page", required = false) Optional<Long> page) {
+            @RequestParam(required = false) Optional<Long> size,
+            @RequestParam(required = false) Optional<Long> page) {
 
         Long currentPage = page.orElse(Long.valueOf(1));
         Long pageSize = size.orElse(Long.valueOf(5));

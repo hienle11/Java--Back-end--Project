@@ -34,4 +34,11 @@ public class DeliveryNoteServiceImpl extends AbstractService<DeliveryNote, Long>
         List<DeliveryNote> wholeResultList = customDeliveryNoteDAO.searchByPeriod(startDate, endDate);
         return getPage(wholeResultList, pageable);
     }
+
+    @Override
+    public List<DeliveryNote> searchByPeriod(String startDate, String endDate) {
+        return customDeliveryNoteDAO.searchByPeriod(startDate, endDate);
+    }
+
+
 }

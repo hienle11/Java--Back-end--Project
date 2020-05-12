@@ -55,7 +55,7 @@ public class DeliveryNoteAPITest {
                 .andReturn();
         String resultBody = result.getResponse().getContentAsString();
         System.out.println(resultBody);
-        String expectedString = " \"content\": [\n" +
+        String expectedString = "\"content\": [\n" +
                 "        {\n" +
                 "            \"id\": 100,\n" +
                 "            \"date\": \"11-06-2019\",\n" +
@@ -80,16 +80,16 @@ public class DeliveryNoteAPITest {
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
                 "                    \"product\": {\n" +
-                "                        \"id\": 100,\n" +
-                "                        \"name\": \"winner\",\n" +
-                "                        \"model\": null,\n" +
-                "                        \"brand\": null,\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
                 "                        \"company\": null,\n" +
-                "                        \"price\": 2.5,\n" +
+                "                        \"price\": 15.0,\n" +
                 "                        \"description\": null,\n" +
                 "                        \"category\": {\n" +
-                "                            \"id\": 100,\n" +
-                "                            \"name\": \"motobikeTest\"\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4\n" +
@@ -109,7 +109,7 @@ public class DeliveryNoteAPITest {
                 "                            \"name\": \"carTest\"\n" +
                 "                        }\n" +
                 "                    },\n" +
-                "                    \"quantity\": 6\n" +
+                "                    \"quantity\": 3\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        },\n" +
@@ -149,7 +149,7 @@ public class DeliveryNoteAPITest {
                 "                            \"name\": \"carTest\"\n" +
                 "                        }\n" +
                 "                    },\n" +
-                "                    \"quantity\": 124\n" +
+                "                    \"quantity\": 1\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -184,16 +184,16 @@ public class DeliveryNoteAPITest {
                 "        {\n" +
                 "            \"id\": 1032,\n" +
                 "            \"product\": {\n" +
-                "                \"id\": 100,\n" +
-                "                \"name\": \"winner\",\n" +
-                "                \"model\": null,\n" +
-                "                \"brand\": null,\n" +
+                "                \"id\": 103,\n" +
+                "                \"name\": \"camry\",\n" +
+                "                \"model\": \"model1234\",\n" +
+                "                \"brand\": \"toyota\",\n" +
                 "                \"company\": null,\n" +
-                "                \"price\": 2.5,\n" +
+                "                \"price\": 15.0,\n" +
                 "                \"description\": null,\n" +
                 "                \"category\": {\n" +
-                "                    \"id\": 100,\n" +
-                "                    \"name\": \"motobikeTest\"\n" +
+                "                    \"id\": 101,\n" +
+                "                    \"name\": \"carTest\"\n" +
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 12\n" +
@@ -285,21 +285,21 @@ public class DeliveryNoteAPITest {
     @Test
     public void updateTest() throws Exception {
         String updatedDeliveryNote = "{\n" +
-                "\"id\": 103,\n" +
-                "    \"deliveryNoteDetails\": [\n" +
-                "    {\n" +
-                "    \"id\": 1031,\n" +
-                "    \"product\": {\n" +
-                "    \"id\": 103\n" +
-                "    },\n" +
-                "    \"quantity\": 7\n" +
-                "    },\n" +
-                "    {\n" +
-                "    \"product\": {\n" +
-                "    \"id\": 101\n" +
-                "    },\n" +
-                "    \"quantity\": 9\n" +
-                "    }\n" +
+                "\t\"id\": 103,\n" +
+                "    \"deliveryDetails\": [\n" +
+                "    \t{\n" +
+                "    \t\t\"id\": 1031,\n" +
+                "    \t\t\"product\": {\n" +
+                "    \t\t\t\"id\": 103\n" +
+                "    \t\t},\n" +
+                "    \t\t\"price\": 3\n" +
+                "    \t},\n" +
+                "    \t{\n" +
+                "    \t\t\"product\": {\n" +
+                "    \t\t\t\"id\": 101\n" +
+                "    \t\t},\n" +
+                "    \t\t\"quantity\": 2\n" +
+                "    \t}\n" +
                 "    ]\n" +
                 "}";
 
@@ -308,41 +308,24 @@ public class DeliveryNoteAPITest {
                 "    \"date\": \"27-05-2019\",\n" +
                 "    \"deliveryNoteDetails\": [\n" +
                 "        {\n" +
-                "            \"id\": 1032,\n" +
+                "            \"id\": 1031,\n" +
                 "            \"product\": {\n" +
-                "                \"id\": 100,\n" +
-                "                \"name\": \"winner\",\n" +
-                "                \"model\": null,\n" +
-                "                \"brand\": null,\n" +
+                "                \"id\": 102,\n" +
+                "                \"name\": \"exciter\",\n" +
+                "                \"model\": \"model2020\",\n" +
+                "                \"brand\": \"yamaha\",\n" +
                 "                \"company\": null,\n" +
-                "                \"price\": 2.5,\n" +
+                "                \"price\": 25.0,\n" +
                 "                \"description\": null,\n" +
                 "                \"category\": {\n" +
                 "                    \"id\": 100,\n" +
                 "                    \"name\": \"motobikeTest\"\n" +
                 "                }\n" +
                 "            },\n" +
-                "            \"quantity\": 12\n" +
+                "            \"quantity\": 4\n" +
                 "        },\n" +
                 "        {\n" +
-                "            \"id\": 1,\n" +
-                "            \"product\": {\n" +
-                "                \"id\": 101,\n" +
-                "                \"name\": \"bmw\",\n" +
-                "                \"model\": null,\n" +
-                "                \"brand\": null,\n" +
-                "                \"company\": null,\n" +
-                "                \"price\": 25.0,\n" +
-                "                \"description\": null,\n" +
-                "                \"category\": {\n" +
-                "                    \"id\": 101,\n" +
-                "                    \"name\": \"carTest\"\n" +
-                "                }\n" +
-                "            },\n" +
-                "            \"quantity\": 9\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"id\": 1031,\n" +
+                "            \"id\": 1032,\n" +
                 "            \"product\": {\n" +
                 "                \"id\": 103,\n" +
                 "                \"name\": \"camry\",\n" +
@@ -356,7 +339,7 @@ public class DeliveryNoteAPITest {
                 "                    \"name\": \"carTest\"\n" +
                 "                }\n" +
                 "            },\n" +
-                "            \"quantity\": 7\n" +
+                "            \"quantity\": 12\n" +
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -410,13 +393,72 @@ public class DeliveryNoteAPITest {
         MvcResult result = mockMvc.perform(
                 MockMvcRequestBuilders.get("/delivery-notes/search")
                         .param("field", "product")
-                        .param("searchKey", "103"))
+                        .param("searchKey", "103")
+                        .param("page", "1")
+                        .param("size", "2"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
         String resultBody = result.getResponse().getContentAsString();
 
-        String resultString = " \"content\": [\n" +
+        String resultString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 100,\n" +
+                "            \"date\": \"11-06-2019\",\n" +
+                "            \"deliveryNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1001,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 101,\n" +
+                "                        \"name\": \"bmw\",\n" +
+                "                        \"model\": null,\n" +
+                "                        \"brand\": null,\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 2\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1002,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 4\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1003,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 101,\n" +
+                "                        \"name\": \"bmw\",\n" +
+                "                        \"model\": null,\n" +
+                "                        \"brand\": null,\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 3\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
                 "        {\n" +
                 "            \"id\": 101,\n" +
                 "            \"date\": \"17-06-2019\",\n" +
@@ -453,7 +495,7 @@ public class DeliveryNoteAPITest {
                 "                            \"name\": \"carTest\"\n" +
                 "                        }\n" +
                 "                    },\n" +
-                "                    \"quantity\": 124\n" +
+                "                    \"quantity\": 1\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -470,7 +512,7 @@ public class DeliveryNoteAPITest {
 
         resultBody = result.getResponse().getContentAsString();
 
-        resultString = "\"content\": [\n" +
+        resultString = " [\n" +
                 "        {\n" +
                 "            \"id\": 103,\n" +
                 "            \"date\": \"27-05-2019\",\n" +
@@ -495,19 +537,135 @@ public class DeliveryNoteAPITest {
                 "                {\n" +
                 "                    \"id\": 1032,\n" +
                 "                    \"product\": {\n" +
-                "                        \"id\": 100,\n" +
-                "                        \"name\": \"winner\",\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 12\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ],";
+        resultString = resultString.replaceAll("[\n ]", "");
+        Assert.assertTrue(resultBody.contains(resultString));
+    }
+
+    @Test
+    public void searchByPeriodTest() throws Exception {
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/delivery-notes/search-by-period")
+                        .param("startDate", "2019-06-11")
+                        .param("endDate", "2019-06-30")
+                        .param("page", "1")
+                        .param("size", "2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String resultBody = result.getResponse().getContentAsString();
+
+        String resultString = " \"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 100,\n" +
+                "            \"date\": \"11-06-2019\",\n" +
+                "            \"deliveryNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1001,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 101,\n" +
+                "                        \"name\": \"bmw\",\n" +
                 "                        \"model\": null,\n" +
                 "                        \"brand\": null,\n" +
                 "                        \"company\": null,\n" +
-                "                        \"price\": 2.5,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 2\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1002,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 4\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1003,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 101,\n" +
+                "                        \"name\": \"bmw\",\n" +
+                "                        \"model\": null,\n" +
+                "                        \"brand\": null,\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 3\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 101,\n" +
+                "            \"date\": \"17-06-2019\",\n" +
+                "            \"deliveryNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1011,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 102,\n" +
+                "                        \"name\": \"exciter\",\n" +
+                "                        \"model\": \"model2020\",\n" +
+                "                        \"brand\": \"yamaha\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
                 "                        \"description\": null,\n" +
                 "                        \"category\": {\n" +
                 "                            \"id\": 100,\n" +
                 "                            \"name\": \"motobikeTest\"\n" +
                 "                        }\n" +
                 "                    },\n" +
-                "                    \"quantity\": 12\n" +
+                "                    \"quantity\": 8\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1012,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 1\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +

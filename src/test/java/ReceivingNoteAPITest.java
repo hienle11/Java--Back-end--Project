@@ -507,4 +507,102 @@ public class ReceivingNoteAPITest {
         resultString = resultString.replaceAll("[\n ]", "");
         Assert.assertTrue(resultBody.contains(resultString));
     }
+
+    @Test
+    public void searchByPeriodTest() throws Exception {
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/receiving-notes/search-by-period")
+                        .param("startDate", "2019-04-11")
+                        .param("endDate", "2019-06-30")
+                        .param("page", "1")
+                        .param("size", "2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String resultBody = result.getResponse().getContentAsString();
+
+        String resultString = " \"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 102,\n" +
+                "            \"date\": \"07-05-2019\",\n" +
+                "            \"staff\": {\n" +
+                "                \"id\": 103,\n" +
+                "                \"name\": \"adam\",\n" +
+                "                \"address\": null,\n" +
+                "                \"phone\": null,\n" +
+                "                \"email\": \"asd@gmail.com\"\n" +
+                "            },\n" +
+                "            \"order\": 102,\n" +
+                "            \"receivingNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1021,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 30\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 103,\n" +
+                "            \"date\": \"11-05-2019\",\n" +
+                "            \"staff\": {\n" +
+                "                \"id\": 103,\n" +
+                "                \"name\": \"adam\",\n" +
+                "                \"address\": null,\n" +
+                "                \"phone\": null,\n" +
+                "                \"email\": \"asd@gmail.com\"\n" +
+                "            },\n" +
+                "            \"order\": 103,\n" +
+                "            \"receivingNoteDetails\": [\n" +
+                "                {\n" +
+                "                    \"id\": 1031,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 103,\n" +
+                "                        \"name\": \"camry\",\n" +
+                "                        \"model\": \"model1234\",\n" +
+                "                        \"brand\": \"toyota\",\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 15.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 1\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"id\": 1032,\n" +
+                "                    \"product\": {\n" +
+                "                        \"id\": 101,\n" +
+                "                        \"name\": \"bmw\",\n" +
+                "                        \"model\": null,\n" +
+                "                        \"brand\": null,\n" +
+                "                        \"company\": null,\n" +
+                "                        \"price\": 25.0,\n" +
+                "                        \"description\": null,\n" +
+                "                        \"category\": {\n" +
+                "                            \"id\": 101,\n" +
+                "                            \"name\": \"carTest\"\n" +
+                "                        }\n" +
+                "                    },\n" +
+                "                    \"quantity\": 5\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ],";
+        resultString = resultString.replaceAll("[\n ]", "");
+        Assert.assertTrue(resultBody.contains(resultString));
+    }
 }

@@ -128,15 +128,15 @@ insert into inventory_delivery_note(id, date) values (999, '2019-05-29');
 
 -- populate delivery note detail
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1001, 100, 101, 2);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1002, 100, 100, 4);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1003, 100, 101, 6);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1002, 100, 103, 4);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1003, 100, 101, 3);
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1011, 101, 102, 8);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1012, 101, 103, 124);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1021, 102, 101, 33);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1012, 101, 103, 1);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1021, 102, 101, 1);
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1031, 103, 102, 4);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1032, 103, 100, 12);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9991, 999, 101, 5);
-insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9992, 999, 100, 11);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (1032, 103, 103, 12);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9991, 999, 101, 2);
+insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9992, 999, 102, 11);
 
 -- populate sales invoice
 insert into sales_invoice(id, date, customer_id, staff_id, total) values (100, '2019-06-11', 100, 100, 160);
