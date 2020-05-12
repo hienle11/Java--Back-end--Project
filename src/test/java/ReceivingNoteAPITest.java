@@ -253,7 +253,7 @@ public class ReceivingNoteAPITest {
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // get the current date
         String expectedResult =  "{\n" +
                 "    \"id\": 1,\n" +
-                "    \"date\": \"11-05-2020\",\n" +
+                "    \"date\": \"" + date + "\",\n" +
                 "    \"staff\": {\n" +
                 "        \"id\": 101,\n" +
                 "        \"name\": \"katy\",\n" +

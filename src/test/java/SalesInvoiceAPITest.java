@@ -250,6 +250,7 @@ public class SalesInvoiceAPITest {
     @Test
     public void createTest() throws Exception {
         String newSalesInvoice = "{\n" +
+                // date is not provided and will be added automatically
                 "\t\"staff\": {\n" +
                 "\t\t\"id\": 101\n" +
                 "\t},\n" +
@@ -284,7 +285,7 @@ public class SalesInvoiceAPITest {
         String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date()); // get the current date
         String expectedResult =  "{\n" +
                 "    \"id\": 1,\n" +
-                "    \"date\": \"12-05-2020\",\n" +
+                "    \"date\": \"" + date + "\",\n" +
                 "    \"staff\": \"katy\",\n" +
                 "    \"customer\": {\n" +
                 "        \"id\": 103,\n" +
@@ -549,13 +550,15 @@ public class SalesInvoiceAPITest {
         result = mockMvc.perform(
                 MockMvcRequestBuilders.get("/sales-invoices/search")
                         .param("field", "product")
-                        .param("searchKey", "101"))
+                        .param("searchKey", "101")
+                        .param("size","1")
+                        .param("page", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
         resultBody = result.getResponse().getContentAsString();
 
-        resultString = "\"content\": [\n" +
+        resultString = " \"content\": [\n" +
                 "        {\n" +
                 "            \"id\": 100,\n" +
                 "            \"date\": \"11-06-2019\",\n" +
@@ -624,59 +627,6 @@ public class SalesInvoiceAPITest {
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
                 "                    \"price\": 100.0\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"id\": 101,\n" +
-                "            \"date\": \"17-06-2019\",\n" +
-                "            \"staff\": \"katy\",\n" +
-                "            \"customer\": {\n" +
-                "                \"id\": 102,\n" +
-                "                \"name\": \"messi\",\n" +
-                "                \"address\": null,\n" +
-                "                \"phone\": null,\n" +
-                "                \"fax\": \"3333\",\n" +
-                "                \"email\": null,\n" +
-                "                \"contactPerson\": null\n" +
-                "            },\n" +
-                "            \"total\": 105.0,\n" +
-                "            \"salesInvoiceDetails\": [\n" +
-                "                {\n" +
-                "                    \"id\": 1011,\n" +
-                "                    \"product\": {\n" +
-                "                        \"id\": 101,\n" +
-                "                        \"name\": \"bmw\",\n" +
-                "                        \"model\": null,\n" +
-                "                        \"brand\": null,\n" +
-                "                        \"company\": null,\n" +
-                "                        \"price\": 25.0,\n" +
-                "                        \"description\": null,\n" +
-                "                        \"category\": {\n" +
-                "                            \"id\": 101,\n" +
-                "                            \"name\": \"carTest\"\n" +
-                "                        }\n" +
-                "                    },\n" +
-                "                    \"quantity\": 3,\n" +
-                "                    \"price\": 75.0\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"id\": 1012,\n" +
-                "                    \"product\": {\n" +
-                "                        \"id\": 103,\n" +
-                "                        \"name\": \"camry\",\n" +
-                "                        \"model\": \"model1234\",\n" +
-                "                        \"brand\": \"toyota\",\n" +
-                "                        \"company\": null,\n" +
-                "                        \"price\": 15.0,\n" +
-                "                        \"description\": null,\n" +
-                "                        \"category\": {\n" +
-                "                            \"id\": 101,\n" +
-                "                            \"name\": \"carTest\"\n" +
-                "                        }\n" +
-                "                    },\n" +
-                "                    \"quantity\": 2,\n" +
-                "                    \"price\": 30.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +

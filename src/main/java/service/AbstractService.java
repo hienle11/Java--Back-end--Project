@@ -55,7 +55,7 @@ public abstract class AbstractService<Entity extends AbstractEntity, ID extends 
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
 
-        List<Entity> paginatedList = getDao().searchPaginated(field, searchKey);
+        List<Entity> paginatedList = getDao().searchPaginated(field, searchKey, pageSize, startItem);
         Page<Entity> entityPage
                 = new PageImpl(paginatedList, PageRequest.of(currentPage, pageSize), 100);
 

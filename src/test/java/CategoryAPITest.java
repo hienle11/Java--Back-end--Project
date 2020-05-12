@@ -123,8 +123,19 @@ public class CategoryAPITest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        String resultString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"id\": 102,\n" +
+                "            \"name\": \"keyTest1\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 103,\n" +
+                "            \"name\": \"keyTest2\"\n" +
+                "        }\n" +
+                "    ],";
+        resultString = resultString.replaceAll("[\n ]", "");
         String resultBody = result.getResponse().getContentAsString();
-        Assert.assertTrue(resultBody.contains("[{\"id\":103,\"name\":\"keyTest1\"},{\"id\":104,\"name\":\"keyTest2\"}]"));
+        Assert.assertTrue(resultBody.contains(resultString));
     }
 
 }

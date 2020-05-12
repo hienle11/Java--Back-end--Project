@@ -31,23 +31,31 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
     }
 
     @Override
-    public List<SalesInvoice> searchPaginated(String field, String searchKey) {
+    public List<SalesInvoice> searchPaginated(String field, String searchKey, int limit, int offset) {
         if (field.equalsIgnoreCase("product")) {
             Query<SalesInvoiceDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from SalesInvoiceDetail "
                             + " where str(" + field + ") like '%" + searchKey + "%'");
-            List<SalesInvoiceDetail> noteDetailResults = query.getResultList();
+            List<SalesInvoiceDetail> invoiceDetailResults = query.getResultList();
             Set<Long> salesInvoiceIds = new HashSet<>();
-            for(SalesInvoiceDetail salesInvoiceDetail: noteDetailResults) {
+            for(SalesInvoiceDetail salesInvoiceDetail: invoiceDetailResults) {
                 salesInvoiceIds.add(salesInvoiceDetail.getSalesInvoice().getId());
             }
             List<SalesInvoice> result = new ArrayList<>();
+            int count = 0;
             for(Long eachId: salesInvoiceIds) {
-                result.add(findById(eachId));
+                count++;
+                if (count > offset) {
+                    result.add(findById(eachId));
+                    limit--;
+                }
+                if (limit == 0) {
+                    break;
+                }
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey);
+            return super.searchPaginated(field, searchKey, limit, offset);
         }
     }
 

@@ -45,7 +45,7 @@ public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Lo
     }
 
     @Override
-    public List<ReceivingNote> searchPaginated(String field, String searchKey) {
+    public List<ReceivingNote> searchPaginated(String field, String searchKey, int limit, int offset) {
         if (field.equalsIgnoreCase("product")) {
             Query<ReceivingNoteDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from ReceivingNoteDetail "
@@ -56,12 +56,20 @@ public class ReceivingNoteDAOImpl extends AbstractHibernateDAO<ReceivingNote, Lo
                 receivingNoteIds.add(receivingNoteDetail.getReceivingNote().getId());
             }
             List<ReceivingNote> result = new ArrayList<>();
+            int count = 0;
             for(Long eachId: receivingNoteIds) {
-                result.add(findById(eachId));
+                count++;
+                if (count > offset) {
+                    result.add(findById(eachId));
+                    limit--;
+                }
+                if (limit == 0) {
+                    break;
+                }
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey);
+            return super.searchPaginated(field, searchKey, limit, offset);
         }
     }
 }

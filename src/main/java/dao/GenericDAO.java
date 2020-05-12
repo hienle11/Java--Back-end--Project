@@ -20,6 +20,6 @@ public interface GenericDAO<Entity extends AbstractEntity, ID> {
 
     long getTotalSize();
 
-    List<Entity> searchPaginated(String field, String searchKey);
+    List<Entity> searchPaginated(String field, String searchKey, int limit, int offset);
 
 }

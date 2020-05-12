@@ -79,11 +79,12 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
     }
 
 
-    public List<Entity> searchPaginated(String field, String searchKey) {
+    public List<Entity> searchPaginated(String field, String searchKey, int limit, int offset) {
         Query<Entity> query = sessionFactory.getCurrentSession()
                 .createQuery("from " + entityClass.getSimpleName()
                 + " where str(" + field + ") like '%" + searchKey + "%'");
-
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
         return query.list();
     }
 

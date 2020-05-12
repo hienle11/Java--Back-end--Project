@@ -41,7 +41,7 @@ public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long
     }
 
     @Override
-    public List<DeliveryNote> searchPaginated(String field, String searchKey) {
+    public List<DeliveryNote> searchPaginated(String field, String searchKey, int limit, int offset) {
         Query<DeliveryNoteDetail> query = sessionFactory.getCurrentSession()
                 .createQuery("from DeliveryNoteDetail "
                         + " where str(" + field + ") like '%" + searchKey + "%'");
@@ -51,8 +51,16 @@ public class DeliveryNoteDAOImpl extends AbstractHibernateDAO<DeliveryNote, Long
             deliveryNoteIds.add(deliveryNoteDetail.getDeliveryNote().getId());
         }
         List<DeliveryNote> result = new ArrayList<>();
+        int count = 0;
         for(Long eachId: deliveryNoteIds) {
-            result.add(findById(eachId));
+            count++;
+            if (count > offset) {
+                result.add(findById(eachId));
+                limit--;
+            }
+            if (limit == 0) {
+                break;
+            }
         }
         return result;
     }

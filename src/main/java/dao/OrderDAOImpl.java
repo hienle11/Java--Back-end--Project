@@ -50,23 +50,31 @@ public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
     }
 
     @Override
-    public List<Order> searchPaginated(String field, String searchKey) {
+    public List<Order> searchPaginated(String field, String searchKey, int limit, int offset) {
         if (field.equalsIgnoreCase("product")) {
             Query<OrderDetail> query = sessionFactory.getCurrentSession()
                     .createQuery("from OrderDetail "
                             + " where str(" + field + ") like '%" + searchKey + "%'");
-            List<OrderDetail> orderDetailResults = query.getResultList();
+            List<OrderDetail> invoiceDetailResults = query.getResultList();
             Set<Long> orderIds = new HashSet<>();
-            for(OrderDetail orderDetail: orderDetailResults) {
+            for(OrderDetail orderDetail: invoiceDetailResults) {
                 orderIds.add(orderDetail.getOrder().getId());
             }
             List<Order> result = new ArrayList<>();
+            int count = 0;
             for(Long eachId: orderIds) {
-                result.add(findById(eachId));
+                count++;
+                if (count > offset) {
+                    result.add(findById(eachId));
+                    limit--;
+                }
+                if (limit == 0) {
+                    break;
+                }
             }
             return result;
         } else {
-            return super.searchPaginated(field, searchKey);
+            return super.searchPaginated(field, searchKey, limit, offset);
         }
     }
 }
