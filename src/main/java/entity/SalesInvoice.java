@@ -33,12 +33,12 @@ public class SalesInvoice extends AbstractEntity<Long> {
     @JoinColumn(foreignKey = @ForeignKey(name="FK_Sales_Customer"))
     private Customer customer;
 
+    @Column
+    private double total;
+
     @NotNull(message = "sales invoice details must be provided")
     @OneToMany(mappedBy = "salesInvoice", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<SalesInvoiceDetail> salesInvoiceDetails;
-
-    @Column
-    private double total;
 
     public Long getId() {
         return id;
@@ -64,8 +64,8 @@ public class SalesInvoice extends AbstractEntity<Long> {
         this.staff = staff;
     }
 
-    public String getCustomer() {
-        return customer.getName();
+    public Customer getCustomer() {
+        return customer;
     }
 
     public void setCustomer(Customer customer) {

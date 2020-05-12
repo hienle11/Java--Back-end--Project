@@ -138,7 +138,24 @@ insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, qua
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9991, 999, 101, 5);
 insert into inventory_delivery_note_details(id, deliveryNote_id, product_id, quantity) values (9992, 999, 100, 11);
 
+-- populate sales invoice
+insert into sales_invoice(id, date, customer_id, staff_id, total) values (100, '2019-06-11', 100, 100, 160);
+insert into sales_invoice(id, date, customer_id, staff_id, total) values (101, '2019-06-17', 102, 101, 105);
+insert into sales_invoice(id, date, customer_id, staff_id, total) values (102, '2019-06-21', 100, 101, 100);
+insert into sales_invoice(id, date, customer_id, staff_id, total) values (103, '2019-05-27', 103, 103, 75);
+insert into sales_invoice(id, date, customer_id, staff_id, total) values (999, '2019-05-29', 101, 101, 105);
 
+-- populate sales invoice details
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1001, 100, 101, 2, 50);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1002, 100, 100, 4, 10);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1003, 100, 102, 4, 100);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1011, 101, 101, 3, 75);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1012, 101, 103, 2, 30);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1021, 102, 102, 4, 100);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1031, 103, 100, 10, 25);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1032, 103, 102, 2, 50);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (9991, 999, 102, 3, 75);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (9992, 999, 103, 2, 30);
 
 
 
