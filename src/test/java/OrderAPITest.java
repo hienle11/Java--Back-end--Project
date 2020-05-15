@@ -277,13 +277,15 @@ public class OrderAPITest {
                     "            \"product\": {\n" +
                     "                \"id\": 100\n" +
                     "            },\n" +
-                    "            \"quantity\": 4\n" +
+                    "            \"quantity\": 4,\n" +
+                    "            \"price\": 8\n" +
                     "        },\n" +
                     "        {\n" +
                     "            \"product\": {\n" +
                     "                \"id\": 101\n" +
                     "            },\n" +
-                    "            \"quantity\": 7\n" +
+                    "            \"quantity\": 7,\n" +
+                    "            \"price\": 160\n" +
                     "        }\n" +
                     "    ]\n" +
                     "}";
@@ -331,7 +333,7 @@ public class OrderAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 4,\n" +
-                "            \"price\": 10.0\n" +
+                "            \"price\": 8.0\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 2,\n" +
@@ -349,7 +351,7 @@ public class OrderAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 7,\n" +
-                "            \"price\": 175.0\n" +
+                "            \"price\": 160.0\n" +
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -377,8 +379,8 @@ public class OrderAPITest {
                 "            \"product\": {\n" +    // order detail 1032 is not provided here and will not be updated
                 "                \"id\": 100\n" +   // new product, currently product is 103
                 "            },\n" +
-                "            \"quantity\": 10\n" +  // new quantity, currently is 10
-                //       price is not provided and will be automatically updated
+                "            \"quantity\": 10,\n" +  // new quantity, currently is 10
+                "            \"price\": 25\n" +  // new quantity, currently is 10
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -437,7 +439,7 @@ public class OrderAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 10,\n" +  // quantity is updated to 10
-                "            \"price\": 25.0\n" +    // price is automatically calculated
+                "            \"price\": 25.0\n" +
                 "        }\n" +
                 "    ]\n" +
                 "}";

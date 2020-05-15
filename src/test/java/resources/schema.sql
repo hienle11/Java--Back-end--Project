@@ -25,7 +25,7 @@ create table order_to_provider (id  bigserial not null, date date, provider_id i
 create table product (id  bigserial not null, brand varchar(255), company varchar(255), description TEXT, model varchar(255), name varchar(255), price float8, category_id int8 not null, primary key (id));
 create table provider (id  bigserial not null, address varchar(255), contactPerson varchar(255), email varchar(255), fax varchar(255), name varchar(255), phone varchar(255), primary key (id));
 create table sales_invoice (id  bigserial not null, date date, total float8, customer_id int8 not null, staff_id int8 not null, primary key (id));
-create table sales_invoice_details (id  bigserial not null, price float8, quantity int8 not null, product_id int8 not null, salesInvoice_id int8 not null, primary key (id));
+create table sales_invoice_details (id  bigserial not null, sub_total float8, quantity int8 not null, product_id int8 not null, salesInvoice_id int8 not null, primary key (id));
 create table staff (id  bigserial not null, address varchar(255), email varchar(255), name varchar(255), phone varchar(255), primary key (id));
 
 -- add constraints to all tables
@@ -89,16 +89,16 @@ insert into order_to_provider(id, date, provider_id, staff_id) values (103, '201
 insert into order_to_provider(id, date, provider_id, staff_id) values (999, '2020-05-11', 100, 102);
 
 -- populate order_detail
-insert into order_detail(id, order_id, product_id, quantity, price) values (1001, 100, 101, 2, 50);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1002, 100, 102, 1, 25);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1003, 100, 103, 3, 45);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1011, 101, 101, 10, 250);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1012, 101, 102, 20, 500);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1021, 102, 103, 30, 450);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1031, 103, 103, 1, 15);
-insert into order_detail(id, order_id, product_id, quantity, price) values (1032, 103, 101, 5, 7.5);
-insert into order_detail(id, order_id, product_id, quantity, price) values (9991, 999, 102, 10, 250);
-insert into order_detail(id, order_id, product_id, quantity, price) values (9992, 999, 103, 15, 225);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1001, 100, 101, 2, 50);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1002, 100, 102, 1, 25);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1003, 100, 103, 3, 45);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1011, 101, 101, 10, 250);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1012, 101, 102, 20, 500);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1021, 102, 103, 30, 450);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1031, 103, 103, 1, 15);
+insert into order_detail(id, order_id, product_id, quantity, price)values (1032, 103, 101, 5, 7.5);
+insert into order_detail(id, order_id, product_id, quantity, price)values (9991, 999, 102, 10, 250);
+insert into order_detail(id, order_id, product_id, quantity, price)values (9992, 999, 103, 15, 225);
 
 -- populate receiving note detail
 insert into inventory_receiving_note(id, date, order_id, staff_id) values (100, '2020-05-11', 100, 103);
@@ -146,16 +146,16 @@ insert into sales_invoice(id, date, customer_id, staff_id, total) values (103, '
 insert into sales_invoice(id, date, customer_id, staff_id, total) values (999, '2019-05-29', 101, 101, 105);
 
 -- populate sales invoice details
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1001, 100, 101, 2, 50);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1002, 100, 100, 4, 10);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1003, 100, 102, 4, 100);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1011, 101, 101, 3, 75);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1012, 101, 103, 2, 30);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1021, 102, 102, 4, 100);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1031, 103, 100, 10, 25);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (1032, 103, 102, 2, 50);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (9991, 999, 102, 3, 75);
-insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, price) values (9992, 999, 103, 2, 30);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1001, 100, 101, 2, 50);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1002, 100, 100, 4, 10);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1003, 100, 102, 4, 100);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1011, 101, 101, 3, 75);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1012, 101, 103, 2, 30);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1021, 102, 102, 4, 100);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1031, 103, 100, 10, 25);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (1032, 103, 102, 2, 50);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (9991, 999, 102, 3, 75);
+insert into sales_invoice_details(id, salesInvoice_id, product_id, quantity, sub_total) values (9992, 999, 103, 2, 30);
 
 
 

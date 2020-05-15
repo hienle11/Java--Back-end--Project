@@ -1,22 +1,21 @@
 package controller;
 
-import dto.InventoryReport;
 import dto.InventoryReportDetail;
-import entity.DeliveryNote;
-import entity.DeliveryNoteDetail;
-import entity.ReceivingNote;
-import entity.ReceivingNoteDetail;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import service.DeliveryNoteService;
 import service.GenericService;
 import service.ReceivingNoteService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/inventory")
@@ -28,9 +27,18 @@ public class InventoryController {
     @Autowired
     DeliveryNoteService deliveryNoteService;
 
+    @Autowired
+    @Qualifier("productServiceImpl")
+    GenericService productService;
+
     @GetMapping()
-    public InventoryReport getInventoryReport(
-            @RequestParam String startDate, @RequestParam String endDate) {
+    public Page<InventoryReportDetail> getInventoryReport(
+            @RequestParam String startDate, @RequestParam String endDate,
+            @RequestParam(required = false) Optional<Long> size,
+            @RequestParam(required = false) Optional<Long> page) {
+
+        Long currentPage = page.orElse(Long.valueOf(0));
+        Long pageSize = size.orElse(Long.valueOf(5));
 
         List<ReceivingNote> receivingNotes = receivingNoteService.searchByPeriod(startDate, endDate);
         List<DeliveryNote> deliveryNotes = deliveryNoteService.searchByPeriod(startDate, endDate);
@@ -70,19 +78,27 @@ public class InventoryController {
             }
         }
 
-
-
-        InventoryReport inventoryReport = new InventoryReport();
-        inventoryReport.setPeriod("from " + startDate + " to " + endDate);
-
         List<InventoryReportDetail> inventoryReportDetails = new ArrayList<>();
 
         productDetails.forEach((productId, values) -> {
-            inventoryReportDetails.add(new InventoryReportDetail(productId.toString(), values[0], values[1], (int)(values[0] - values[1])));
+            Product product = (Product) productService.findById(productId);
+            inventoryReportDetails.add(new InventoryReportDetail(product.getName(), values[0], values[1], (int)(values[0] - values[1])));
         });
-        inventoryReport.setInventoryDetails(inventoryReportDetails);
 
-        return inventoryReport;
+        List<InventoryReportDetail> paginatedList = new ArrayList<>();
+        int count = 0;
+        int limit = pageSize.intValue();
+        for (InventoryReportDetail eachDetail: inventoryReportDetails) {
+            count++;
+            if (count >= pageSize.intValue() * currentPage.intValue()) {
+                paginatedList.add(eachDetail);
+                limit--;
+            }
+            if (limit == 0) {
+                break;
+            }
+        }
+        return new PageImpl(paginatedList, PageRequest.of(currentPage.intValue(), pageSize.intValue()), inventoryReportDetails.size());
     }
 
 }

@@ -1,16 +1,9 @@
 package dao;
 
 import entity.*;
-import org.apache.commons.beanutils.BeanUtilsBean;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -86,10 +79,10 @@ public class SalesInvoiceDAOImpl extends AbstractHibernateDAO<SalesInvoice, Long
                 // set oder for salesInvoice detail
                 salesInvoiceDetail.setSalesInvoice(salesInvoice);
 
-                if (salesInvoiceDetail.getPrice() == 0) {
-                    salesInvoiceDetail.setPrice(salesInvoiceDetail.getProduct().getPrice() * salesInvoiceDetail.getQuantity());
+                if (salesInvoiceDetail.getSubTotal() == 0) {
+                    salesInvoiceDetail.setSubTotal(salesInvoiceDetail.getProduct().getPrice() * salesInvoiceDetail.getQuantity());
                 }
-                totalAmount += salesInvoiceDetail.getPrice();
+                totalAmount += salesInvoiceDetail.getSubTotal();
             }
         } else {
             salesInvoice.setSalesInvoiceDetails(null);

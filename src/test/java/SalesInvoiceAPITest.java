@@ -87,7 +87,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 50.0\n" +
+                "                    \"subTotal\": 50.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
@@ -105,7 +105,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 10.0\n" +
+                "                    \"subTotal\": 10.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1003,\n" +
@@ -123,7 +123,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        },\n" +
@@ -158,7 +158,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 3,\n" +
-                "                    \"price\": 75.0\n" +
+                "                    \"subTotal\": 75.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1012,\n" +
@@ -176,7 +176,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 30.0\n" +
+                "                    \"subTotal\": 30.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -218,7 +218,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 10,\n" +
-                "            \"price\": 25.0\n" +
+                "            \"subTotal\": 25.0\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 1032,\n" +
@@ -236,7 +236,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 2,\n" +
-                "            \"price\": 50.0\n" +
+                "            \"subTotal\": 50.0\n" +
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -264,14 +264,14 @@ public class SalesInvoiceAPITest {
                 "                \"id\": 102\n" +
                 "            },\n" +
                 "            \"quantity\": 11\n" +
-                            // price of each invoice details is calculated by product id multiplied by quantity
+                            // subTotal of each invoice details is calculated by product id multiplied by quantity
                 "        },\n" +
                 "        {\n" +
                 "            \"product\": {\n" +
                 "                \"id\": 100\n" +
                 "            },\n" +
                 "            \"quantity\": 22\n" +
-                            // price of each invoice details is calculated by product id multiplied by quantity
+                            // subTotal of each invoice details is calculated by product id multiplied by quantity
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -314,7 +314,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 11,\n" +
-                "            \"price\": 275.0\n" +         // price of an invoice detail = price of product * quantity
+                "            \"subTotal\": 275.0\n" +         // subTotal of an invoice detail = price of product * quantity
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 2,\n" +
@@ -332,7 +332,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 22,\n" +
-                "            \"price\": 55.0\n" +       // price of an invoice detail = price of product * quantity
+                "            \"subTotal\": 55.0\n" +       // subTotal of an invoice detail = price of product * quantity
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -351,7 +351,7 @@ public class SalesInvoiceAPITest {
                 "    \"salesInvoiceDetails\": [\n" +
                 "    \t{\n" +
                 "    \t\t\"id\": 1031,\n" +
-                "    \t\t\"price\": 20\n" +
+                "    \t\t\"subTotal\": 20\n" +
                 "    \t},\n" +
                 "    \t{\n" +
                 "    \t\t\"product\": {\n" +
@@ -393,7 +393,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 2,\n" +
-                "            \"price\": 50.0\n" +
+                "            \"subTotal\": 50.0\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 1,\n" +        // new invoice detail is added with id 1
@@ -411,7 +411,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 8,\n" +
-                "            \"price\": 200.0\n" +
+                "            \"subTotal\": 200.0\n" +
                 "        },\n" +
                 "        {\n" +
                 "            \"id\": 1031,\n" +
@@ -429,7 +429,7 @@ public class SalesInvoiceAPITest {
                 "                }\n" +
                 "            },\n" +
                 "            \"quantity\": 10,\n" +
-                "            \"price\": 20.0\n" +           // price of invoice detail 1031 is changed from 25 to 20
+                "            \"subTotal\": 20.0\n" +           // subTotal of invoice detail 1031 is changed from 25 to 20
                 "        }\n" +
                 "    ]\n" +
                 "}";
@@ -521,7 +521,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 3,\n" +
-                "                    \"price\": 75.0\n" +
+                "                    \"subTotal\": 75.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1012,\n" +
@@ -539,7 +539,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 30.0\n" +
+                "                    \"subTotal\": 30.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -590,7 +590,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 50.0\n" +
+                "                    \"subTotal\": 50.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
@@ -608,7 +608,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 10.0\n" +
+                "                    \"subTotal\": 10.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1003,\n" +
@@ -626,7 +626,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -675,7 +675,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -730,7 +730,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 50.0\n" +
+                "                    \"subTotal\": 50.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
@@ -748,7 +748,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 10.0\n" +
+                "                    \"subTotal\": 10.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1003,\n" +
@@ -766,7 +766,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        },\n" +
@@ -801,7 +801,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 3,\n" +
-                "                    \"price\": 75.0\n" +
+                "                    \"subTotal\": 75.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1012,\n" +
@@ -819,7 +819,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 30.0\n" +
+                "                    \"subTotal\": 30.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -872,7 +872,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 50.0\n" +
+                "                    \"subTotal\": 50.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
@@ -890,7 +890,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 10.0\n" +
+                "                    \"subTotal\": 10.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1003,\n" +
@@ -908,7 +908,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        },\n" +
@@ -943,7 +943,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +
@@ -995,7 +995,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 2,\n" +
-                "                    \"price\": 50.0\n" +
+                "                    \"subTotal\": 50.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1002,\n" +
@@ -1013,7 +1013,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 10.0\n" +
+                "                    \"subTotal\": 10.0\n" +
                 "                },\n" +
                 "                {\n" +
                 "                    \"id\": 1003,\n" +
@@ -1031,7 +1031,7 @@ public class SalesInvoiceAPITest {
                 "                        }\n" +
                 "                    },\n" +
                 "                    \"quantity\": 4,\n" +
-                "                    \"price\": 100.0\n" +
+                "                    \"subTotal\": 100.0\n" +
                 "                }\n" +
                 "            ]\n" +
                 "        }\n" +

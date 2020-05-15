@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "order_to_provider")
-public class Order extends AbstractEntity<Long> {
+public class    Order extends AbstractEntity<Long> {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

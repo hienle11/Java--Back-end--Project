@@ -22,8 +22,8 @@ public class SalesInvoiceDetail extends AbstractEntity<Long> {
     @NotNull(message = "quantity in sale invoice detail must not be null")
     private long quantity;
 
-    @Column
-    private double price;
+    @Column(name = "sub_total")
+    private double subTotal;
 
     @JsonIgnore
     @ManyToOne
@@ -56,12 +56,12 @@ public class SalesInvoiceDetail extends AbstractEntity<Long> {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getSubTotal() {
+        return subTotal;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSubTotal(double price) {
+        this.subTotal = price;
     }
 
     public SalesInvoice getSalesInvoice() {

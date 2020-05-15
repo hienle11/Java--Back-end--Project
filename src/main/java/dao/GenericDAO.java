@@ -4,9 +4,10 @@ import entity.AbstractEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface GenericDAO<Entity extends AbstractEntity, ID> {
+public interface GenericDAO<Entity extends AbstractEntity, ID extends Serializable> {
 
     Entity findById(ID id);
 

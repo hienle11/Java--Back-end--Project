@@ -79,6 +79,7 @@ public abstract class AbstractCRUDController <Entity extends AbstractEntity, ID 
                 (field, searchKey, PageRequest.of(currentPage.intValue() - 1, pageSize.intValue()));
 
         return entityPage;
-
     }
+
+
 }

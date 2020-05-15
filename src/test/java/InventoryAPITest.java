@@ -47,31 +47,58 @@ public class InventoryAPITest {
 
         // IMPORTANT: It is reasonable that balance can be negative value,
         // since more products could be received before the given period
-        String expectedString = "{\n" +
-                "    \"period\": \"from 2019-04-11 to 2019-06-30\",\n" +
-                "    \"inventoryDetails\": [\n" +
+        String expectedString = "\"content\": [\n" +
                 "        {\n" +
-                "            \"productName\": \"101\",\n" +
+                "            \"productName\": \"bmw\",\n" +
                 "            \"receivedQuantity\": 5,\n" +
                 "            \"deliveredQuantity\": 8,\n" +
                 "            \"balance\": -3\n" +
                 "        },\n" +
                 "        {\n" +
-                "            \"productName\": \"102\",\n" +
+                "            \"productName\": \"exciter\",\n" +
                 "            \"receivedQuantity\": 0,\n" +
                 "            \"deliveredQuantity\": 23,\n" +
                 "            \"balance\": -23\n" +
                 "        },\n" +
                 "        {\n" +
-                "            \"productName\": \"103\",\n" +
+                "            \"productName\": \"camry\",\n" +
                 "            \"receivedQuantity\": 31,\n" +
                 "            \"deliveredQuantity\": 17,\n" +
                 "            \"balance\": 14\n" +
                 "        }\n" +
-                "    ]\n" +
-                "}";
+                "    ],";
         expectedString = expectedString.replaceAll("[\n ]", "");
         String resultBody = result.getResponse().getContentAsString();
+        resultBody = resultBody.replaceAll(" ", "");
+        Assert.assertTrue(resultBody.contains(expectedString));
+
+        result = mockMvc.perform(
+                MockMvcRequestBuilders.get("/inventory")
+                        .param("startDate", "2019-04-11")
+                        .param("endDate", "2019-06-30")
+                        .param("page", "1")
+                        .param("size", "2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        // IMPORTANT: It is reasonable that balance can be negative value,
+        // since more products could be received before the given period
+        expectedString = "\"content\": [\n" +
+                "        {\n" +
+                "            \"productName\": \"exciter\",\n" +
+                "            \"receivedQuantity\": 0,\n" +
+                "            \"deliveredQuantity\": 23,\n" +
+                "            \"balance\": -23\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"productName\": \"camry\",\n" +
+                "            \"receivedQuantity\": 31,\n" +
+                "            \"deliveredQuantity\": 17,\n" +
+                "            \"balance\": 14\n" +
+                "        }\n" +
+                "    ],";
+        expectedString = expectedString.replaceAll("[\n ]", "");
+        resultBody = result.getResponse().getContentAsString();
         resultBody = resultBody.replaceAll(" ", "");
         Assert.assertTrue(resultBody.contains(expectedString));
     }

@@ -35,14 +35,6 @@ public class OrderDAOImpl extends AbstractHibernateDAO<Order, Long> {
 
                 // set oder for order detail
                 orderDetail.setOrder(order);
-
-                // map price for order detail from quantity and product price
-                Product incomingProduct = orderDetail.getProduct();
-                Long productId = incomingProduct.getId();
-                Product product = sessionFactory.getCurrentSession().get(Product.class, productId);
-                if (product != null) {
-                    orderDetail.setPrice(product.getPrice() * orderDetail.getQuantity());
-                }
             }
         } else {
             order.setOrderDetails(null);
