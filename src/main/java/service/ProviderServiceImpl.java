@@ -11,7 +11,7 @@ public class ProviderServiceImpl extends AbstractService<Provider, Long> {
 
     @Autowired
     @Qualifier("providerDAOImpl")
-    GenericDAO providerDAO;
+    private GenericDAO providerDAO;
 
     @Override
     protected GenericDAO getDao() {

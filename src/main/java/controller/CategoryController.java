@@ -13,7 +13,7 @@ public class CategoryController extends AbstractCRUDController<Category, Long> {
 
     @Autowired
     @Qualifier("categoryServiceImpl")
-    GenericService categoryService;
+    private GenericService categoryService;
 
     @Override
     protected GenericService getService() {

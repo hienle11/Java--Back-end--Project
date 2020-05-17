@@ -12,7 +12,7 @@ public class CategoryServiceImpl extends AbstractService<Category, Long> {
 
     @Autowired
     @Qualifier("categoryDAOImpl")
-    GenericDAO categoryDAO;
+    private GenericDAO categoryDAO;
 
     @Override
     protected GenericDAO getDao() {

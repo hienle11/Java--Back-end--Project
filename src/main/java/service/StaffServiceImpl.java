@@ -11,7 +11,7 @@ public class StaffServiceImpl extends AbstractService<Staff, Long> implements Ge
 
     @Autowired
     @Qualifier("staffDAOImpl")
-    GenericDAO staffDAO;
+    private GenericDAO staffDAO;
 
     @Override
     protected GenericDAO getDao() {

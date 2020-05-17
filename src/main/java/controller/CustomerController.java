@@ -13,7 +13,7 @@ public class CustomerController extends AbstractCRUDController<Customer, Long>{
 
     @Autowired
     @Qualifier("customerServiceImpl")
-    GenericService customerService;
+    private GenericService customerService;
 
     @Override
     protected GenericService getService() {

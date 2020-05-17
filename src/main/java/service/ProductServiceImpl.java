@@ -15,7 +15,7 @@ public class ProductServiceImpl extends AbstractService<Product, Long> {
 
     @Autowired
     @Qualifier("productDAOImpl")
-    GenericDAO productDAO;
+    private GenericDAO productDAO;
 
     @Override
     protected GenericDAO getDao() {

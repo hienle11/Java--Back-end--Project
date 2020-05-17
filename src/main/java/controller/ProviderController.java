@@ -13,7 +13,7 @@ public class ProviderController extends AbstractCRUDController<Provider, Long>{
 
     @Autowired
     @Qualifier("providerServiceImpl")
-    GenericService providerService;
+    private GenericService providerService;
 
     @Override
     protected GenericService getService() {

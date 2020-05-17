@@ -24,14 +24,14 @@ public class EntityExceptionHandler {
     }
 
     // this handler is for all other exceptions
-//    @ExceptionHandler
-//    public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {
-//        EntityErrorResponse error = new EntityErrorResponse(
-//                                        HttpStatus.BAD_REQUEST.value(),
-//                                        exc.getMessage(),
-//                                        System.currentTimeMillis());
-//        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler
+    public ResponseEntity<EntityErrorResponse> handleException(Exception exc) {
+        EntityErrorResponse error = new EntityErrorResponse(
+                                        HttpStatus.BAD_REQUEST.value(),
+                                        exc.getMessage(),
+                                        System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 
     // this handler is for constraints violations on entity (such as NotBlank etc)
 

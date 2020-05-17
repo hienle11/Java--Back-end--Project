@@ -18,10 +18,10 @@ public class ReceivingNoteServiceImpl extends AbstractService<ReceivingNote, Lon
 
     @Autowired
     @Qualifier("receivingNoteDAOImpl")
-    GenericDAO receivingNoteDAO;
+    private GenericDAO receivingNoteDAO;
 
     @Autowired
-    ReceivingNoteDAO customReceivingNoteDAO;
+    private ReceivingNoteDAO customReceivingNoteDAO;
 
     @Override
     protected GenericDAO getDao() {

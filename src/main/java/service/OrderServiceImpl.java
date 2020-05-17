@@ -11,7 +11,7 @@ public class OrderServiceImpl extends AbstractService<Order, Long> {
 
     @Autowired
     @Qualifier("orderDAOImpl")
-    GenericDAO orderDAO;
+    private GenericDAO orderDAO;
 
     @Override
     protected GenericDAO getDao() {

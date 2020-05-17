@@ -12,7 +12,7 @@ public class ProductController extends AbstractCRUDController<Product, Long>{
 
     @Autowired
     @Qualifier("productServiceImpl")
-    GenericService productService;
+    private GenericService productService;
 
     @Override
     protected GenericService getService() {

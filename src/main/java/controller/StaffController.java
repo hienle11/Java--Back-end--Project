@@ -13,7 +13,7 @@ public class StaffController extends AbstractCRUDController<Staff, Long>{
 
     @Autowired
     @Qualifier("staffServiceImpl")
-    GenericService staffService;
+    private GenericService staffService;
 
     @Override
     protected GenericService getService() {

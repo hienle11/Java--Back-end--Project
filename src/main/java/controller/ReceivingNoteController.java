@@ -21,10 +21,10 @@ public class ReceivingNoteController extends AbstractCRUDController<ReceivingNot
 
     @Autowired
     @Qualifier("receivingNoteServiceImpl")
-    GenericService receivingNoteService;
+    private GenericService receivingNoteService;
 
     @Autowired
-    ReceivingNoteService customReceivingNoteService;
+    private ReceivingNoteService customReceivingNoteService;
 
     @Override
     protected GenericService getService() {

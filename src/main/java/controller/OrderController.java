@@ -13,7 +13,7 @@ public class OrderController extends AbstractCRUDController<Order, Long>{
 
     @Autowired
     @Qualifier("orderServiceImpl")
-    GenericService orderService;
+    private GenericService orderService;
 
     @Override
     protected GenericService getService() {

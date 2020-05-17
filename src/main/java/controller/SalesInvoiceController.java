@@ -18,10 +18,10 @@ public class SalesInvoiceController extends AbstractCRUDController<SalesInvoice,
 
     @Autowired
     @Qualifier("salesInvoiceServiceImpl")
-    GenericService salesInvoiceService;
+    private GenericService salesInvoiceService;
 
     @Autowired
-    SalesInvoiceService customSalesInvoiceService;
+    private SalesInvoiceService customSalesInvoiceService;
 
     @Override
     protected GenericService getService() {

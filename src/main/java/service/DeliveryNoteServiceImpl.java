@@ -19,7 +19,7 @@ public class DeliveryNoteServiceImpl extends AbstractService<DeliveryNote, Long>
         implements GenericService<DeliveryNote, Long>, DeliveryNoteService {
     @Autowired
     @Qualifier("deliveryNoteDAOImpl")
-    GenericDAO deliveryNoteDAO;
+    private GenericDAO deliveryNoteDAO;
 
     @Autowired
     DeliveryNoteDAO customDeliveryNoteDAO;

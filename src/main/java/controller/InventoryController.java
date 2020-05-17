@@ -22,10 +22,10 @@ import java.util.Optional;
 public class InventoryController {
 
     @Autowired
-    ReceivingNoteService receivingNoteService;
+    private ReceivingNoteService receivingNoteService;
 
     @Autowired
-    DeliveryNoteService deliveryNoteService;
+    private DeliveryNoteService deliveryNoteService;
 
     @Autowired
     @Qualifier("productServiceImpl")

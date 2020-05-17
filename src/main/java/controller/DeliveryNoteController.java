@@ -22,10 +22,10 @@ public class DeliveryNoteController extends AbstractCRUDController<DeliveryNote,
 
     @Autowired
     @Qualifier("deliveryNoteServiceImpl")
-    GenericService deliveryNoteService;
+    private GenericService deliveryNoteService;
 
     @Autowired
-    DeliveryNoteService customDeliveryNoteService;
+    private DeliveryNoteService customDeliveryNoteService;
 
     @Override
     protected GenericService getService() {

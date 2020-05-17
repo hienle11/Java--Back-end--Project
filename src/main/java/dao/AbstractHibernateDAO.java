@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -18,11 +17,11 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
     @Autowired
     SessionFactory sessionFactory;
 
-    private final Class<Entity> entityClass;
+    private final Class<Entity> ENTITYCLASS;
 
     // initialize the value of entityClass, so that it can be used for later queries
     public AbstractHibernateDAO() {
-        this.entityClass = (Class<Entity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.ENTITYCLASS = (Class<Entity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public Session getCurrentSession() {
@@ -31,18 +30,18 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
 
 
     public Entity findById(ID id) {
-        return sessionFactory.getCurrentSession().get(entityClass, id);
+        return sessionFactory.getCurrentSession().get(ENTITYCLASS, id);
     }
 
     public long getTotalSize() {
         Query<Long> query = sessionFactory.getCurrentSession()
-                .createQuery("select count(*) from " + entityClass.getSimpleName());
+                .createQuery("select count(*) from " + ENTITYCLASS.getSimpleName());
         return query.uniqueResult();
     }
 
     public List<Entity> findByPage(int limit, int offset) {
         Query<Entity> query = sessionFactory.getCurrentSession()
-                .createQuery("from " + entityClass.getSimpleName());
+                .createQuery("from " + ENTITYCLASS.getSimpleName());
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         return query.list();
@@ -54,7 +53,7 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
     }
 
     public Entity update(Entity incomingEntity) {
-        Entity currentEntity = sessionFactory.getCurrentSession().get(entityClass, incomingEntity.getId());
+        Entity currentEntity = sessionFactory.getCurrentSession().get(ENTITYCLASS, incomingEntity.getId());
 
         try {
             new BeanUtilsBean() {
@@ -81,7 +80,7 @@ public abstract class AbstractHibernateDAO<Entity extends AbstractEntity, ID ext
 
     public List<Entity> searchPaginated(String field, String searchKey) {
         Query<Entity> query = sessionFactory.getCurrentSession()
-                .createQuery("from " + entityClass.getSimpleName()
+                .createQuery("from " + ENTITYCLASS.getSimpleName()
                 + " where str(" + field + ") like '%" + searchKey + "%'");
 
         return query.list();

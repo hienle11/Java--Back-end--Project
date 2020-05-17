@@ -18,10 +18,10 @@ public class SalesInvoiceServiceImpl extends AbstractService<SalesInvoice, Long>
 
     @Autowired
     @Qualifier("salesInvoiceDAOImpl")
-    GenericDAO salesInvoiceDAO;
+    private GenericDAO salesInvoiceDAO;
 
     @Autowired
-    SalesInvoiceDAO customSalesInvoiceDAO;
+    private SalesInvoiceDAO customSalesInvoiceDAO;
 
     @Override
     protected GenericDAO getDao() {

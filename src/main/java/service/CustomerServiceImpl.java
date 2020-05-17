@@ -11,7 +11,7 @@ public class CustomerServiceImpl extends AbstractService<Customer, Long> {
 
     @Autowired
     @Qualifier("customerDAOImpl")
-    GenericDAO customerDAO;
+    private GenericDAO customerDAO;
 
     @Override
     protected GenericDAO getDao() {
